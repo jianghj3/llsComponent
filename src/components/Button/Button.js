@@ -4,10 +4,17 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+  View,
+} from 'react-native';
 
 // import Theme from 'teaset/themes/Theme';
-import {Theme} from '../../component-path';
+import Theme from '../../component-path';
 
 export default class Button extends Component {
   static propTypes = {
@@ -18,7 +25,7 @@ export default class Button extends Component {
       'danger',
       'link',
     ]),
-    size: PropTypes.oneOf(['xl', 'lg', 'md', 'sm', 'xs']),
+    size: PropTypes.oneOf(['xl', 'large', 'md', 'sm', 'xs']),
     title: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.string,
@@ -42,30 +49,59 @@ export default class Button extends Component {
   }
 
   buildStyle() {
-    let {style, type, size, disabled} = this.props;
+    let {style, type, size, press, disabled} = this.props;
 
     let backgroundColor,
       borderColor,
       borderWidth,
       borderRadius,
+      width,
+      height,
       paddingVertical,
       paddingHorizontal;
     switch (type) {
       case 'primary':
         backgroundColor = Theme.btnPrimaryColor;
-        borderColor = Theme.btnPrimaryBorderColor;
+        borderColor = Theme.btnPrimaryColor;
+        if (press) {
+          backgroundColor = Theme.btnPrimaryPressColor;
+          borderColor = Theme.btnPrimaryPressColor;
+        }
+        if (disabled) {
+          backgroundColor = Theme.btnPrimaryDisabledColor;
+          borderColor = Theme.btnPrimaryDisabledColor;
+        }
         break;
       case 'secondary':
         backgroundColor = Theme.btnSecondaryColor;
         borderColor = Theme.btnSecondaryBorderColor;
+        if (press) {
+          borderColor = Theme.btnSecondaryPressBorderColor;
+        }
+        if (disabled) {
+          borderColor = Theme.btnSecondaryDisabledBorderColor;
+        }
         break;
       case 'danger':
         backgroundColor = Theme.btnDangerColor;
         borderColor = Theme.btnDangerBorderColor;
         break;
+      case 'link':
+        backgroundColor = Theme.btnLinkColor;
+        borderColor = Theme.btnLinkBorderColor;
+        break;
       default:
         backgroundColor = Theme.btnPrimaryColor;
-        borderColor = Theme.btnPrimaryBorderColor;
+        borderColor = Theme.btnPrimaryColor;
+        if (press) {
+          backgroundColor = Theme.btnPrimaryPressColor;
+          borderColor = Theme.btnPrimaryPressColor;
+        }
+        if (disabled) {
+          backgroundColor = Theme.btnPrimaryDisabledColor;
+          borderColor = Theme.btnPrimaryDisabledColor;
+        }
+        break;
     }
     switch (size) {
       case 'xl':
@@ -73,10 +109,10 @@ export default class Button extends Component {
         paddingVertical = Theme.btnPaddingVerticalXL;
         paddingHorizontal = Theme.btnPaddingHorizontalXL;
         break;
-      case 'lg':
-        borderRadius = Theme.btnBorderRadiusLG;
-        paddingVertical = Theme.btnPaddingVerticalLG;
-        paddingHorizontal = Theme.btnPaddingHorizontalLG;
+      case 'large':
+        borderRadius = Theme.btnBorderRadiusLarge;
+        width = Theme.btnWidthLarge;
+        height = Theme.btnHeightLarge;
         break;
       case 'sm':
         borderRadius = Theme.btnBorderRadiusSM;
@@ -89,9 +125,9 @@ export default class Button extends Component {
         paddingHorizontal = Theme.btnPaddingHorizontalXS;
         break;
       default:
-        borderRadius = Theme.btnBorderRadiusMD;
-        paddingVertical = Theme.btnPaddingVerticalMD;
-        paddingHorizontal = Theme.btnPaddingHorizontalMD;
+        borderRadius = Theme.btnBorderRadiusLarge;
+        width = Theme.btnWidthLarge;
+        height = Theme.btnHeightLarge;
     }
     borderWidth = Theme.btnBorderWidth;
 
@@ -101,6 +137,8 @@ export default class Button extends Component {
         borderColor,
         borderWidth,
         borderRadius,
+        width,
+        height,
         paddingVertical: paddingVertical,
         paddingHorizontal: paddingHorizontal,
         overflow: 'hidden',
@@ -110,44 +148,40 @@ export default class Button extends Component {
       },
     ].concat(style);
     style = StyleSheet.flatten(style);
-    if (disabled) {
-      switch (type) {
-        //button为disabled且在不同的type下显示不同的backgroundColor
-        case 'primary':
-          style.backgroundColor = Theme.btndisabledPrimaryColor;
-          style.borderColor = Theme.btndisabledBorderPrimaryColor;
-          break;
-        case 'secondary':
-          backgroundColor = Theme.btnSecondaryColor;
-          borderColor = Theme.btnSecondaryBorderColor;
-          break;
-        case 'danger':
-          backgroundColor = Theme.btnDangerColor;
-          borderColor = Theme.btnDangerBorderColor;
-          break;
-        default:
-          backgroundColor = Theme.btnSecondaryColor;
-          borderColor = Theme.btnBorderColor;
-      }
-    }
 
     return style;
   }
 
   renderTitle() {
-    let {type, size, title, titleStyle, children} = this.props;
+    let {
+      type,
+      size,
+      title,
+      titleStyle,
+      children,
+      press,
+      disabled,
+      loading,
+      done,
+    } = this.props;
 
     if (
       !React.isValidElement(title) &&
       (title || title === '' || title === 0)
     ) {
-      let textColor, textFontSize;
+      let textColor, textFontSize, renderLoading, renderDone;
       switch (type) {
         case 'primary':
           textColor = Theme.btnPrimaryTitleColor;
           break;
         case 'secondary':
           textColor = Theme.btnSecondaryTitleColor;
+          if (press) {
+            textColor = Theme.btnSecondaryPressTitleColor;
+          }
+          if (disabled) {
+            textColor = Theme.btnSecondaryDisabledTitleColor;
+          }
           break;
         case 'danger':
           textColor = Theme.btnDangerTitleColor;
@@ -156,14 +190,14 @@ export default class Button extends Component {
           textColor = Theme.btnLinkTitleColor;
           break;
         default:
-          textColor = Theme.btnTitleColor;
+          textColor = Theme.btnPrimaryTitleColor;
       }
       switch (size) {
         case 'xl':
           textFontSize = Theme.btnFontSizeXL;
           break;
-        case 'lg':
-          textFontSize = Theme.btnFontSizeLG;
+        case 'large':
+          textFontSize = Theme.btnFontSizeLarge;
           break;
         case 'sm':
           textFontSize = Theme.btnFontSizeSM;
@@ -172,8 +206,31 @@ export default class Button extends Component {
           textFontSize = Theme.btnFontSizeXS;
           break;
         default:
-          textFontSize = Theme.btnFontSizeMD;
+          textFontSize = Theme.btnFontSizeLarge;
       }
+
+      //渲染loading图标
+      if (loading) {
+        renderLoading = (
+          <ActivityIndicator color={textColor} style={{marginRight: 6}} />
+        );
+      }
+
+      //渲染done图标
+      if (done) {
+        renderDone = (
+          <AntDesign
+            name={'checkcircleo'}
+            size={20}
+            style={{
+              color: textColor,
+              marginRight: 6,
+              textAlignVertical: 'center',
+            }}
+          />
+        );
+      }
+
       titleStyle = [
         {
           color: textColor,
@@ -182,9 +239,13 @@ export default class Button extends Component {
         },
       ].concat(titleStyle);
       title = (
-        <Text style={titleStyle} numberOfLines={1}>
-          {title}
-        </Text>
+        <View style={{flexDirection: 'row'}}>
+          {renderLoading}
+          {renderDone}
+          <Text style={titleStyle} numberOfLines={1}>
+            {title}
+          </Text>
+        </View>
       );
     }
 

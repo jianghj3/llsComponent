@@ -5,7 +5,7 @@
 import React, {Component} from 'react';
 import {View, ScrollView, Text, Image, StyleSheet} from 'react-native';
 
-// import {NavigationPage, ListRow, Button, Label, Theme} from 'teaset';
+// import { NavigationPage, ListRow, Button, Label, Theme } from 'teaset';
 import {NavigationPage, ListRow, Button, Label, Theme} from '../component-path';
 
 export default class ButtonExample extends NavigationPage {
@@ -18,49 +18,160 @@ export default class ButtonExample extends NavigationPage {
   renderPage() {
     return (
       <ScrollView style={{flex: 1}}>
-        <View style={{height: 20}} />
         <View style={styles.category}>
-          <Text style={styles.categoryText}>大按钮</Text>
+          <Text style={styles.categoryText}>主按钮</Text>
         </View>
         <ListRow
-          detail={<Button title="页面主要操作" type="primary" />}
+          style={styles.listRowContainer}
+          detail={<Button title="主按钮" type="primary" size="large" />}
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={
+            <Button title="主按钮" type="primary" size="large" press={true} />
+          }
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={
+            <Button
+              title="主按钮"
+              type="primary"
+              size="large"
+              disabled={true}
+            />
+          }
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={
+            <Button title="主按钮" type="primary" size="large" loading={true} />
+          }
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={
+            <Button title="主按钮" type="primary" size="large" done={true} />
+          }
+          bottomSeparator="none"
+        />
+
+        <View style={styles.category}>
+          <Text style={styles.categoryText}>次按钮</Text>
+        </View>
+        <ListRow
+          style={styles.listRowContainer}
+          detail={<Button title="次按钮" type="secondary" size="large" />}
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={
+            <Button title="次按钮" type="secondary" size="large" press={true} />
+          }
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={
+            <Button
+              title="次按钮"
+              type="secondary"
+              size="large"
+              disabled={true}
+            />
+          }
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={
+            <Button
+              title="次按钮"
+              type="secondary"
+              size="large"
+              loading={true}
+            />
+          }
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={
+            <Button title="次按钮" type="secondary" size="large" done={true} />
+          }
+          bottomSeparator="none"
+        />
+
+        <View style={styles.category}>
+          <Text style={styles.categoryText}>文字按钮</Text>
+        </View>
+
+        <ListRow
+          style={styles.listRowContainer}
+          detail={<Button title="Button" />}
           topSeparator="none"
           bottomSeparator="none"
         />
         <ListRow
-          detail={<Button title="不可点击" type="primary" disabled={true} />}
+          style={styles.listRowContainer}
+          detail={<Button title="Button" type="secondary" />}
           bottomSeparator="none"
         />
         <ListRow
-          detail={<Button title="页面次要操作" type="secondary" />}
+          style={styles.listRowContainer}
+          detail={<Button title="Button" type="danger" />}
           bottomSeparator="none"
         />
         <ListRow
-          detail={<Button title="不可点击" type="secondary" disabled={true} />}
+          style={styles.listRowContainer}
+          detail={<Button title="Button" type="link" />}
           bottomSeparator="none"
-        />
-        <ListRow
-          detail={<Button title="警示类操作" type="danger" />}
-          bottomSeparator="none"
-        />
-        <ListRow
-          detail={<Button title="不可点击" type="danger" disabled={true} />}
-          bottomSeparator="none"
+          bottomSeparator="full"
         />
         <View style={{height: 20}} />
-        <ListRow title="Size xs" detail={<Button title="Button" size="xs" />} />
+        <ListRow
+          title="Size xs"
+          detail={<Button title="Button" size="xs" />}
+          topSeparator="full"
+        />
         <ListRow title="Size sm" detail={<Button title="Button" size="sm" />} />
         <ListRow title="Size md" detail={<Button title="Button" size="md" />} />
-        <ListRow title="Size lg" detail={<Button title="Button" size="lg" />} />
-        <ListRow title="Size xl" detail={<Button title="Button" size="xl" />} />
+        <ListRow
+          title="Size lg"
+          detail={<Button title="Button" size="large" />}
+        />
+        <ListRow
+          title="Size xl"
+          detail={<Button title="Button" size="xl" />}
+          bottomSeparator="full"
+        />
         <View style={{height: 20}} />
+        <ListRow
+          title="Type default disabled"
+          detail={<Button title="Button" disabled={true} />}
+          topSeparator="full"
+        />
         <ListRow
           title="Type primary disabled"
           detail={<Button title="Button" type="primary" disabled={true} />}
         />
         <ListRow
+          title="Type secondary disabled"
+          detail={<Button title="Button" type="secondary" disabled={true} />}
+        />
+        <ListRow
+          title="Type danger disabled"
+          detail={<Button title="Button" type="danger" disabled={true} />}
+        />
+        <ListRow
           title="Type link disabled"
           detail={<Button title="Button" type="link" disabled={true} />}
+          bottomSeparator="full"
         />
         <View style={{height: 20}} />
         <ListRow
@@ -92,14 +203,18 @@ export default class ButtonExample extends NavigationPage {
 
 const styles = StyleSheet.create({
   category: {
-    marginLeft: 9,
-    marginBottom: 15,
+    marginTop: 20,
+    marginLeft: 5,
+    marginBottom: 10,
     paddingLeft: 5,
-    borderLeftColor: '#00A0E4',
-    borderLeftWidth: 6,
-    borderStyle: 'solid',
+    borderLeftColor: '#0887ff',
+    borderLeftWidth: 5,
   },
   categoryText: {
     fontSize: 18,
+  },
+  listRowContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 });

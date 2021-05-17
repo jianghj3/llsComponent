@@ -5,14 +5,16 @@
 import {PixelRatio} from 'react-native';
 
 //primary color
-const primaryColor = 'rgb(0, 160, 228)';
-const disabledPrimaryColor = 'rgb(178, 226, 246)'; //diabled时，按钮的背景颜色
+const primaryColor = '#0887ff';
+const primaryPressColor = '#0a64eb';
+const primaryDisabledColor = '#d9d9d9';
 //secondary color
 const secondaryColor = '#fff';
-const secondaryBorderColor = '#00A0E4';
-
+const secondaryTitleColor = '#0887ff';
+const secondaryBorderColor = '#d0e6fc';
+const secondaryPressColor = '#0a64eb';
 //default color
-const defaultColor = 'rgb(0, 160, 228)';
+const defaultColor = '#fff';
 //default text color
 const defaultTextColor = '#333';
 
@@ -49,51 +51,66 @@ export default {
   labelDetailScale: 0.9, //23, 18, 13, 9, 7
   labelDangerScale: 1,
 
-  //Button - background color
+  //Button - default color
+  btnColor: defaultColor,
+  //Button - primary background color
   btnPrimaryColor: primaryColor,
-  btndisabledPrimaryColor: disabledPrimaryColor,
+  btnPrimaryPressColor: primaryPressColor,
+  btnPrimaryDisabledColor: primaryDisabledColor,
+  //Button - secondary background color
   btnSecondaryColor: secondaryColor,
   btnDangerColor: '#d9534f',
   btnLinkColor: 'rgba(0, 0, 0, 0)',
   //Button - title color
   btnTitleColor: primaryColor,
+  //Button - primary title color
   btnPrimaryTitleColor: '#fff',
-  btnSecondaryTitleColor: secondaryBorderColor,
+  //Button - secondary title color
+  btnSecondaryTitleColor: secondaryTitleColor,
+  btnSecondaryPressTitleColor: secondaryPressColor,
+  btnSecondaryDisabledTitleColor: '#999',
   btnDangerTitleColor: '#fff',
   btnLinkTitleColor: primaryColor,
   //Button - border color
   btnBorderColor: primaryColor,
-  btnPrimaryBorderColor: primaryColor,
-  btndisabledBorderPrimaryColor: disabledPrimaryColor,
+  //Button - secondary border color
   btnSecondaryBorderColor: secondaryBorderColor,
+  btnSecondaryPressBorderColor: secondaryPressColor,
+  btnSecondaryDisabledBorderColor: '#e2e2e2',
   btnDangerBorderColor: '#d9534f',
   btnLinkBorderColor: 'rgba(0, 0, 0, 0)',
   //Button - border width
   btnBorderWidth: 1,
   //Button - border radius
   btnBorderRadiusXL: 6,
-  btnBorderRadiusLG: 6,
+  btnBorderRadiusLarge: 6,
   btnBorderRadiusMD: 4,
   btnBorderRadiusSM: 3,
   btnBorderRadiusXS: 3,
   //Button - font size
   btnFontSizeXL: 29,
-  btnFontSizeLG: 22,
+  btnFontSizeLarge: 18,
   btnFontSizeMD: 15,
   btnFontSizeSM: 11,
   btnFontSizeXS: 9,
+  //Button - width
+  btnWidthLarge: 310,
+  //Button - height
+  btnHeightLarge: 49,
   //Button - padding vertical
   btnPaddingVerticalXL: 8,
-  btnPaddingVerticalLG: 8,
+  btnPaddingVerticalLarge: 16,
   btnPaddingVerticalMD: 6,
   btnPaddingVerticalSM: 4,
   btnPaddingVerticalXS: 2,
   //Button - padding horizontal
   btnPaddingHorizontalXL: 20,
-  btnPaddingHorizontalLG: 16,
+  btnPaddingHorizontalLarge: 128,
   btnPaddingHorizontalMD: 12,
   btnPaddingHorizontalSM: 8,
   btnPaddingHorizontalXS: 4,
+  //Button - disabled opacity
+  btnDisabledOpacity: 0.65,
 
   //Checkbox
   cbTitleColor: defaultTextColor,
