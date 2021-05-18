@@ -110,90 +110,193 @@ export default class ButtonExample extends NavigationPage {
         <View style={styles.category}>
           <Text style={styles.categoryText}>文字按钮</Text>
         </View>
+        <ListRow
+          style={styles.listRowContainer}
+          detail={<Button title="文字按钮" type="text" />}
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={<Button title="文字按钮" type="text" press={true} />}
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={<Button title="文字按钮" type="text" disabled={true} />}
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={<Button title="文字按钮" type="text" loading={true} />}
+          bottomSeparator="none"
+        />
 
+        <View style={styles.category}>
+          <Text style={styles.categoryText}>图标按钮</Text>
+        </View>
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button title="Button" />}
-          topSeparator="none"
+          detail={<Button type="icon" iconName="upload" />}
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button title="Button" type="secondary" />}
+          detail={<Button type="icon" iconName="upload" press={true} />}
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button title="Button" type="danger" />}
+          detail={<Button type="icon" iconName="upload" disabled={true} />}
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button title="Button" type="link" />}
+          detail={<Button type="icon" loading={true} />}
           bottomSeparator="none"
-          bottomSeparator="full"
         />
-        <View style={{height: 20}} />
+
+        <View style={styles.category}>
+          <Text style={styles.categoryText}>中按钮Primary</Text>
+        </View>
         <ListRow
-          title="Size xs"
-          detail={<Button title="Button" size="xs" />}
-          topSeparator="full"
-        />
-        <ListRow title="Size sm" detail={<Button title="Button" size="sm" />} />
-        <ListRow title="Size md" detail={<Button title="Button" size="md" />} />
-        <ListRow
-          title="Size lg"
-          detail={<Button title="Button" size="large" />}
+          style={styles.listRowContainer}
+          detail={<Button title="Normal" type="primary" size="middle" />}
+          bottomSeparator="none"
         />
         <ListRow
-          title="Size xl"
-          detail={<Button title="Button" size="xl" />}
-          bottomSeparator="full"
-        />
-        <View style={{height: 20}} />
-        <ListRow
-          title="Type default disabled"
-          detail={<Button title="Button" disabled={true} />}
-          topSeparator="full"
+          style={styles.listRowContainer}
+          detail={
+            <Button title="Press" type="primary" size="middle" press={true} />
+          }
+          bottomSeparator="none"
         />
         <ListRow
-          title="Type primary disabled"
-          detail={<Button title="Button" type="primary" disabled={true} />}
-        />
-        <ListRow
-          title="Type secondary disabled"
-          detail={<Button title="Button" type="secondary" disabled={true} />}
-        />
-        <ListRow
-          title="Type danger disabled"
-          detail={<Button title="Button" type="danger" disabled={true} />}
-        />
-        <ListRow
-          title="Type link disabled"
-          detail={<Button title="Button" type="link" disabled={true} />}
-          bottomSeparator="full"
-        />
-        <View style={{height: 20}} />
-        <ListRow
-          title="Custom"
+          style={styles.listRowContainer}
           detail={
             <Button
-              style={{
-                backgroundColor: '#rgba(238, 169, 91, 0.1)',
-                borderColor: '#8a6d3b',
-              }}>
-              <Image
-                style={{width: 16, height: 16, tintColor: '#8a6d3b'}}
-                source={require('../icons/search.png')}
-              />
-              <Label
-                style={{color: '#8a6d3b', fontSize: 16, paddingLeft: 8}}
-                text="Search"
-              />
-            </Button>
+              title="Disable"
+              type="primary"
+              size="middle"
+              disabled={true}
+            />
           }
-          topSeparator="full"
-          bottomSeparator="full"
+          bottomSeparator="none"
+        />
+
+        <View style={styles.category}>
+          <Text style={styles.categoryText}>中按钮Secondary</Text>
+        </View>
+        <ListRow
+          style={styles.listRowContainer}
+          detail={<Button title="Normal" type="secondary" size="middle" />}
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={
+            <Button title="Press" type="secondary" size="middle" press={true} />
+          }
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={
+            <Button
+              title="Disable"
+              type="secondary"
+              size="middle"
+              disabled={true}
+            />
+          }
+          bottomSeparator="none"
+        />
+
+        <View style={styles.category}>
+          <Text style={styles.categoryText}>小按钮</Text>
+        </View>
+        <ListRow
+          style={styles.listRowContainer}
+          detail={<Button title="小按钮" type="primary" size="small" />}
+          bottomSeparator="none"
+        />
+
+        <View style={styles.category}>
+          <Text style={styles.categoryText}>图标组合按钮</Text>
+        </View>
+        <ListRow
+          style={styles.listRowContainer}
+          detail={
+            <Button
+              title="图标按钮"
+              type="iconPrimaryButton"
+              iconName="upload"
+              size="large"
+            />
+          }
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={
+            <Button
+              title="图标按钮"
+              iconName="upload"
+              type="iconSecondaryButton"
+              size="large"
+            />
+          }
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={
+            <Button title="图标按钮" iconName="upload" type="iconTextButton" />
+          }
+          bottomSeparator="none"
+        />
+
+        <View style={styles.category}>
+          <Text style={styles.categoryText}>置底按钮</Text>
+        </View>
+
+        <View style={styles.category}>
+          <Text style={styles.categoryText}>释义按钮带角标</Text>
+        </View>
+        <ListRow
+          style={styles.listRowContainer}
+          detail={<Button title="释义按钮" type="primary" mark={true} />}
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={<Button title="释义按钮" type="secondary" mark={true} />}
+          bottomSeparator="none"
+        />
+
+        <View style={styles.category}>
+          <Text style={styles.categoryText}>释义按钮multiLine</Text>
+        </View>
+        <ListRow
+          style={styles.listRowContainer}
+          detail={
+            <Button
+              title="释义按钮"
+              content="此处为描述性文案此处为描述性文案"
+              type="primary"
+            />
+          }
+          bottomSeparator="none"
+        />
+        <ListRow
+          style={styles.listRowContainer}
+          detail={
+            <Button
+              title="释义按钮"
+              content="此处为描述性文案此处为描述性文案"
+              type="secondary"
+            />
+          }
+          bottomSeparator="none"
         />
         <View style={{height: Theme.screenInset.bottom}} />
       </ScrollView>

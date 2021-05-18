@@ -3,7 +3,7 @@
 'use strict';
 
 import {PixelRatio} from 'react-native';
-
+//Button
 //primary color
 const primaryColor = '#0887ff';
 const primaryPressColor = '#0a64eb';
@@ -13,10 +13,22 @@ const secondaryColor = '#fff';
 const secondaryTitleColor = '#0887ff';
 const secondaryBorderColor = '#d0e6fc';
 const secondaryPressColor = '#0a64eb';
+//text color
+const textColor = '#0887ff';
 //default color
 const defaultColor = '#fff';
 //default text color
 const defaultTextColor = '#333';
+//primary lineHeight
+const largeLineHeight = 24;
+const middleLineHeight = 25;
+const smallLineHeight = 23;
+//middle and small height
+const heightMiddle = 49;
+const heightSmall = 38;
+//middle and small button border-radius
+const middleRadius = Math.ceil(heightMiddle / 2);
+const smallRadius = Math.ceil(heightSmall / 2);
 
 //pixel size
 const pixelSize = (function() {
@@ -59,8 +71,8 @@ export default {
   btnPrimaryDisabledColor: primaryDisabledColor,
   //Button - secondary background color
   btnSecondaryColor: secondaryColor,
-  btnDangerColor: '#d9534f',
-  btnLinkColor: 'rgba(0, 0, 0, 0)',
+  //Button - Text background Color
+  btnTextBackgroundColor: '#fff',
   //Button - title color
   btnTitleColor: primaryColor,
   //Button - primary title color
@@ -69,34 +81,42 @@ export default {
   btnSecondaryTitleColor: secondaryTitleColor,
   btnSecondaryPressTitleColor: secondaryPressColor,
   btnSecondaryDisabledTitleColor: '#999',
-  btnDangerTitleColor: '#fff',
-  btnLinkTitleColor: primaryColor,
+  //Button - text title color
+  btnTextColor: textColor,
+  btnTextPressTitleColor: '#0a64eb',
+  btnTextDisabledTitleColor: '#999',
+  //Button - title linHeight
+  btnLargeLineHeight: largeLineHeight,
+  btnMiddleLineHeight: middleLineHeight,
+  btnSmallLineHeight: smallLineHeight,
   //Button - border color
   btnBorderColor: primaryColor,
   //Button - secondary border color
   btnSecondaryBorderColor: secondaryBorderColor,
   btnSecondaryPressBorderColor: secondaryPressColor,
   btnSecondaryDisabledBorderColor: '#e2e2e2',
-  btnDangerBorderColor: '#d9534f',
-  btnLinkBorderColor: 'rgba(0, 0, 0, 0)',
   //Button - border width
   btnBorderWidth: 1,
   //Button - border radius
-  btnBorderRadiusXL: 6,
   btnBorderRadiusLarge: 6,
-  btnBorderRadiusMD: 4,
-  btnBorderRadiusSM: 3,
-  btnBorderRadiusXS: 3,
+  btnBorderRadiusMiddle: middleRadius,
+  btnBorderRadiusSmall: smallRadius,
   //Button - font size
-  btnFontSizeXL: 29,
   btnFontSizeLarge: 18,
-  btnFontSizeMD: 15,
-  btnFontSizeSM: 11,
-  btnFontSizeXS: 9,
+  btnFontSizeMiddle: 18,
+  btnFontSizeSmall: 16,
   //Button - width
   btnWidthLarge: 310,
+  btnWidthMiddle: 156,
+  btnWidthSmall: 92,
   //Button - height
   btnHeightLarge: 49,
+  btnHeightMiddle: heightMiddle,
+  btnHeightSmall: heightSmall,
+  btnMultiLineHeight: 60,
+  //Button - icon
+  btnIconMarginRight: 6,
+  btnIconSize: 20,
   //Button - padding vertical
   btnPaddingVerticalXL: 8,
   btnPaddingVerticalLarge: 16,

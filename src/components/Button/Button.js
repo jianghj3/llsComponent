@@ -22,21 +22,25 @@ export default class Button extends Component {
       'default',
       'primary',
       'secondary',
-      'danger',
-      'link',
+      'text',
+      'icon',
+      'iconPrimaryButton',
+      'iconSecondaryButton',
+      'iconTextButton',
     ]),
-    size: PropTypes.oneOf(['xl', 'large', 'md', 'sm', 'xs']),
+    size: PropTypes.oneOf(['large', 'middle', 'small']),
     title: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.string,
       PropTypes.number,
     ]),
     titleStyle: Text.propTypes.style,
+    iconName: PropTypes.string,
   };
 
   static defaultProps = {
     type: 'default',
-    size: 'md',
+    size: 'large',
   };
 
   measureInWindow(callback) {
@@ -49,16 +53,9 @@ export default class Button extends Component {
   }
 
   buildStyle() {
-    let {style, type, size, press, disabled} = this.props;
+    let {style, type, size, press, disabled, content} = this.props;
 
-    let backgroundColor,
-      borderColor,
-      borderWidth,
-      borderRadius,
-      width,
-      height,
-      paddingVertical,
-      paddingHorizontal;
+    let backgroundColor, borderColor, borderWidth, borderRadius, width, height;
     switch (type) {
       case 'primary':
         backgroundColor = Theme.btnPrimaryColor;
@@ -82,13 +79,25 @@ export default class Button extends Component {
           borderColor = Theme.btnSecondaryDisabledBorderColor;
         }
         break;
-      case 'danger':
-        backgroundColor = Theme.btnDangerColor;
-        borderColor = Theme.btnDangerBorderColor;
+      case 'text':
+        backgroundColor = Theme.btnTextBackgroundColor;
+        borderColor = Theme.btnTextBackgroundColor;
         break;
-      case 'link':
-        backgroundColor = Theme.btnLinkColor;
-        borderColor = Theme.btnLinkBorderColor;
+      case 'icon':
+        backgroundColor = Theme.btnTextBackgroundColor;
+        borderColor = Theme.btnTextBackgroundColor;
+        break;
+      case 'iconPrimaryButton':
+        backgroundColor = Theme.btnPrimaryColor;
+        borderColor = Theme.btnPrimaryColor;
+        break;
+      case 'iconSecondaryButton':
+        backgroundColor = Theme.btnSecondaryColor;
+        borderColor = Theme.btnSecondaryBorderColor;
+        break;
+      case 'iconTextButton':
+        backgroundColor = Theme.btnTextBackgroundColor;
+        borderColor = Theme.btnTextBackgroundColor;
         break;
       default:
         backgroundColor = Theme.btnPrimaryColor;
@@ -104,30 +113,39 @@ export default class Button extends Component {
         break;
     }
     switch (size) {
-      case 'xl':
-        borderRadius = Theme.btnBorderRadiusXL;
-        paddingVertical = Theme.btnPaddingVerticalXL;
-        paddingHorizontal = Theme.btnPaddingHorizontalXL;
-        break;
       case 'large':
         borderRadius = Theme.btnBorderRadiusLarge;
         width = Theme.btnWidthLarge;
         height = Theme.btnHeightLarge;
+        if (content) {
+          height = 60;
+        }
         break;
-      case 'sm':
-        borderRadius = Theme.btnBorderRadiusSM;
-        paddingVertical = Theme.btnPaddingVerticalSM;
-        paddingHorizontal = Theme.btnPaddingHorizontalSM;
+      case 'middle':
+        borderRadius = Theme.btnBorderRadiusMiddle;
+        width = Theme.btnWidthMiddle;
+        height = Theme.btnHeightMiddle;
+        if (style && style.height) {
+          borderRadius = Math.ceil(style.height / 2);
+        }
         break;
-      case 'xs':
-        borderRadius = Theme.btnBorderRadiusXS;
-        paddingVertical = Theme.btnPaddingVerticalXS;
-        paddingHorizontal = Theme.btnPaddingHorizontalXS;
+      case 'small':
+        borderRadius = Theme.btnBorderRadiusSmall;
+        width = Theme.btnWidthSmall;
+        height = Theme.btnHeightSmall;
+        if (style && style.height) {
+          borderRadius = Math.ceil(style.height / 2);
+        }
         break;
       default:
-        borderRadius = Theme.btnBorderRadiusLarge;
-        width = Theme.btnWidthLarge;
-        height = Theme.btnHeightLarge;
+        if (type !== 'text' && type !== 'icon' && type !== 'iconTextButton') {
+          borderRadius = Theme.btnBorderRadiusLarge;
+          width = Theme.btnWidthLarge;
+          height = Theme.btnHeightLarge;
+        }
+        if (content) {
+          height = Theme.btnMultiLineHeight;
+        }
     }
     borderWidth = Theme.btnBorderWidth;
 
@@ -139,8 +157,6 @@ export default class Button extends Component {
         borderRadius,
         width,
         height,
-        paddingVertical: paddingVertical,
-        paddingHorizontal: paddingHorizontal,
         overflow: 'hidden',
         flexDirection: 'row',
         alignItems: 'center',
@@ -157,99 +173,201 @@ export default class Button extends Component {
       type,
       size,
       title,
+      content,
       titleStyle,
-      children,
       press,
       disabled,
       loading,
       done,
+      iconName,
+      iconSize,
     } = this.props;
 
-    if (
-      !React.isValidElement(title) &&
-      (title || title === '' || title === 0)
-    ) {
-      let textColor, textFontSize, renderLoading, renderDone;
-      switch (type) {
-        case 'primary':
-          textColor = Theme.btnPrimaryTitleColor;
-          break;
-        case 'secondary':
-          textColor = Theme.btnSecondaryTitleColor;
-          if (press) {
-            textColor = Theme.btnSecondaryPressTitleColor;
-          }
-          if (disabled) {
-            textColor = Theme.btnSecondaryDisabledTitleColor;
-          }
-          break;
-        case 'danger':
-          textColor = Theme.btnDangerTitleColor;
-          break;
-        case 'link':
-          textColor = Theme.btnLinkTitleColor;
-          break;
-        default:
-          textColor = Theme.btnPrimaryTitleColor;
-      }
-      switch (size) {
-        case 'xl':
-          textFontSize = Theme.btnFontSizeXL;
-          break;
-        case 'large':
-          textFontSize = Theme.btnFontSizeLarge;
-          break;
-        case 'sm':
-          textFontSize = Theme.btnFontSizeSM;
-          break;
-        case 'xs':
-          textFontSize = Theme.btnFontSizeXS;
-          break;
-        default:
-          textFontSize = Theme.btnFontSizeLarge;
+    let buttonTitle,
+      textColor,
+      textFontSize,
+      textLineHeight,
+      renderLoading,
+      renderDone,
+      renderIcon,
+      textIconSize,
+      renderContent;
+
+    switch (type) {
+      case 'primary':
+        textColor = Theme.btnPrimaryTitleColor;
+        if (size === 'middle') {
+          textLineHeight = Theme.btnMiddleLineHeight;
+        } else if (size === 'small') {
+          textLineHeight = Theme.btnSmallLineHeight;
+        } else {
+          textLineHeight = Theme.btnLargeLineHeight;
+        }
+        break;
+      case 'secondary':
+        textColor = Theme.btnSecondaryTitleColor;
+        if (press) {
+          textColor = Theme.btnSecondaryPressTitleColor;
+        }
+        if (disabled) {
+          textColor = Theme.btnSecondaryDisabledTitleColor;
+        }
+        if (size === 'middle') {
+          textLineHeight = Theme.btnMiddleLineHeight;
+        }
+        break;
+      case 'text':
+        textColor = Theme.btnTextColor;
+        if (press) {
+          textColor = Theme.btnSecondaryPressTitleColor;
+        }
+        if (disabled) {
+          textColor = Theme.btnSecondaryDisabledTitleColor;
+        }
+        break;
+      case 'icon':
+        textColor = Theme.btnTextColor;
+        if (press) {
+          textColor = Theme.btnSecondaryPressTitleColor;
+        }
+        if (disabled) {
+          textColor = Theme.btnSecondaryDisabledTitleColor;
+        }
+        break;
+      case 'iconPrimaryButton':
+        textColor = Theme.btnPrimaryTitleColor;
+        break;
+      case 'iconSecondaryButton':
+        textColor = Theme.btnSecondaryTitleColor;
+        break;
+      case 'iconTextButton':
+        textColor = Theme.btnTextColor;
+        break;
+      default:
+        textColor = Theme.btnPrimaryTitleColor;
+    }
+    switch (size) {
+      case 'large':
+        textFontSize = Theme.btnFontSizeLarge;
+        break;
+      case 'middle':
+        textFontSize = Theme.btnFontSizeMiddle;
+        break;
+      case 'small':
+        textFontSize = Theme.btnFontSizeSmall;
+        break;
+      default:
+        textFontSize = Theme.btnFontSizeLarge;
+    }
+    //设置按钮的默认title
+    if (title) {
+      buttonTitle = title;
+    } else if (type !== 'icon') {
+      buttonTitle = '按钮';
+    }
+
+    //设置icon的大小
+    if (iconSize) {
+      textIconSize = iconSize;
+    } else {
+      textIconSize = Theme.btnIconSize;
+    }
+
+    //渲染loading图标
+    if (loading) {
+      renderLoading = (
+        <ActivityIndicator
+          color={textColor}
+          style={{marginRight: Theme.btnIconMarginRight}}
+        />
+      );
+    }
+
+    //渲染done图标
+    if (done) {
+      renderDone = (
+        <AntDesign
+          name={'checkcircleo'}
+          size={textIconSize}
+          style={{
+            color: textColor,
+            marginRight: Theme.btnIconMarginRight,
+            textAlignVertical: 'center',
+          }}
+        />
+      );
+    }
+
+    //渲染图标按钮的图标
+    if (!loading) {
+      //考虑到图标按钮的loading的渲染，如果loading为true的话，只渲染loading图标
+      let iconMarginRight = 0;
+      if (
+        //type为icon时，不需要右边距
+        type === 'iconPrimaryButton' ||
+        type === 'iconSecondaryButton' ||
+        type === 'iconTextButton'
+      ) {
+        iconMarginRight = Theme.btnIconMarginRight;
       }
 
-      //渲染loading图标
-      if (loading) {
-        renderLoading = (
-          <ActivityIndicator color={textColor} style={{marginRight: 6}} />
-        );
-      }
-
-      //渲染done图标
-      if (done) {
-        renderDone = (
+      if (
+        type === 'icon' ||
+        type === 'iconPrimaryButton' ||
+        type === 'iconSecondaryButton' ||
+        type === 'iconTextButton'
+      ) {
+        renderIcon = (
           <AntDesign
-            name={'checkcircleo'}
-            size={20}
+            name={iconName}
+            size={textIconSize}
             style={{
               color: textColor,
-              marginRight: 6,
+              marginRight: iconMarginRight,
               textAlignVertical: 'center',
             }}
           />
         );
       }
-
-      titleStyle = [
-        {
-          color: textColor,
-          fontSize: textFontSize,
-          overflow: 'hidden',
-        },
-      ].concat(titleStyle);
-      title = (
-        <View style={{flexDirection: 'row'}}>
-          {renderLoading}
-          {renderDone}
-          <Text style={titleStyle} numberOfLines={1}>
-            {title}
-          </Text>
-        </View>
+    }
+    //渲染释义按钮多行文字的content
+    if (content) {
+      renderContent = (
+        <Text
+          style={{
+            color: textColor,
+            fontSize: 13,
+            marginTop: 6,
+            lineHeight: 14,
+          }}>
+          {content}
+        </Text>
       );
     }
 
-    return title ? title : children;
+    titleStyle = [
+      {
+        color: textColor,
+        fontSize: textFontSize,
+        lineHeight: textLineHeight,
+        overflow: 'hidden',
+      },
+    ].concat(titleStyle);
+    title = (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <View style={{flexDirection: 'row'}}>
+          {renderLoading}
+          {renderDone}
+          {renderIcon}
+          <Text style={titleStyle} numberOfLines={1}>
+            {buttonTitle}
+          </Text>
+        </View>
+        {renderContent}
+      </View>
+    );
+
+    return title;
   }
 
   render() {
@@ -265,7 +383,6 @@ export default class Button extends Component {
       ...others
     } = this.props;
     style = this.buildStyle();
-    if (disabled) activeOpacity = style.opacity;
     return (
       <TouchableOpacity
         style={style}
