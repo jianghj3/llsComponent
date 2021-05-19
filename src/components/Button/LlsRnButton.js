@@ -16,7 +16,7 @@ import {
 // import Theme from 'teaset/themes/Theme';
 import Theme from '../../component-path';
 
-export default class Button extends Component {
+export default class LlsRnButton extends Component {
   static propTypes = {
     type: PropTypes.oneOf([
       'default',

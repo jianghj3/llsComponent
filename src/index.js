@@ -4,7 +4,7 @@
 
 import Theme from './themes/Theme';
 import Label from './components/Label/Label';
-import Button from './components/Button/Button';
+import LlsRnButton from './components/Button/LlsRnButton';
 import Checkbox from './components/Checkbox/Checkbox';
 import Input from './components/Input/Input';
 import Select from './components/Select/Select';
@@ -45,7 +45,7 @@ var Teaset = {
   Theme,
 
   Label,
-  Button,
+  LlsRnButton,
   Checkbox,
   Input,
   Select,

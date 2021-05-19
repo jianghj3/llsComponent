@@ -6,13 +6,14 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 
-import Theme from 'teaset/themes/Theme';
+// import Theme from 'teaset/themes/Theme';
+import Theme from '../../component-path';
 
 export default class Checkbox extends Component {
   static propTypes = {
     checked: PropTypes.bool,
     defaultChecked: PropTypes.bool,
-    size: PropTypes.oneOf(['lg', 'md', 'sm']),
+    size: PropTypes.oneOf(['large', 'lg', 'md', 'sm']),
     title: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.string,
@@ -32,6 +33,9 @@ export default class Checkbox extends Component {
     ]),
     uncheckedIconStyle: Image.propTypes.style,
     onChange: PropTypes.func,
+    checkedDisabled: PropTypes.bool, //禁用勾选判断
+    checkedDisabledIconStyle: Image.propTypes.style,
+    disabledIconStyle: Image.propTypes.style,
   };
 
   static defaultProps = {
@@ -67,16 +71,13 @@ export default class Checkbox extends Component {
 
     style = [
       {
-        backgroundColor: 'rgba(0, 0, 0, 0)',
+        backgroundColor: '#fff',
         overflow: 'hidden',
         flexDirection: 'row',
         alignItems: 'center',
       },
     ].concat(style);
     style = StyleSheet.flatten(style);
-    if (disabled) {
-      style.opacity = Theme.cbDisabledOpacity;
-    }
 
     return style;
   }
@@ -88,10 +89,21 @@ export default class Checkbox extends Component {
       uncheckedIcon,
       checkedIconStyle,
       uncheckedIconStyle,
+      checkedDisabled,
+      checkedDisabledIconStyle,
+      disabled,
+      disabledIconStyle,
+      checkBoxContent,
+      defaultBoxStyle,
     } = this.props;
     let {checked} = this.state;
 
-    let iconSize;
+    let iconSize,
+      tintColor,
+      borderWidth,
+      borderColor,
+      borderRadius,
+      renderCapsule;
     switch (size) {
       case 'lg':
         iconSize = Theme.cbIconSizeLG;
@@ -99,19 +111,50 @@ export default class Checkbox extends Component {
       case 'sm':
         iconSize = Theme.cbIconSizeSM;
         break;
+      case 'large':
+        let capsuleStyle = [
+          {
+            width: Theme.cbCapsuleWidth,
+            height: Theme.cbCapsuleHeight,
+            backgroundColor: 'red',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 5,
+          },
+        ];
+        renderCapsule = (
+          <TouchableOpacity style={capsuleStyle}>
+            <Text>{checkBoxContent}</Text>
+          </TouchableOpacity>
+        );
+        break;
       default:
-        iconSize = Theme.cbIconSizeMD;
+        iconSize = Theme.cbIconSize;
+    }
+
+    if (checked) {
+      tintColor = Theme.cbCheckedTintColor;
+    } else if (checkedDisabled) {
+      tintColor = Theme.cbCheckedDisabledTintColor;
+    } else if (disabled) {
+      tintColor = Theme.cbDisabledTintColor;
+      borderWidth = Theme.cbDisabledBorderWidth;
+      borderColor = Theme.cbDisabledBorderColor;
+      borderRadius = Theme.cbDisabledBorderRadious;
+    } else {
+      tintColor = Theme.cbUncheckedTintColor;
     }
 
     let iconStyle = [
       {
-        tintColor: checked
-          ? Theme.cbCheckedTintColor
-          : Theme.cbUncheckedTintColor,
+        tintColor,
         width: iconSize,
         height: iconSize,
+        borderWidth,
+        borderColor,
+        borderRadius,
       },
-    ].concat(checked ? checkedIconStyle : uncheckedIconStyle);
+    ].concat(defaultBoxStyle);
 
     if (
       !React.isValidElement(checkedIcon) &&
@@ -128,7 +171,11 @@ export default class Checkbox extends Component {
       );
     }
 
-    return checked ? checkedIcon : uncheckedIcon;
+    if (size === 'large') {
+      return renderCapsule;
+    } else {
+      return checked || checkedDisabled ? checkedIcon : uncheckedIcon;
+    }
   }
 
   renderTitle() {
@@ -144,21 +191,17 @@ export default class Checkbox extends Component {
           textFontSize = Theme.cbFontSizeLG;
           textPaddingLeft = Theme.cbTitlePaddingLeftLG;
           break;
-        case 'sm':
-          textFontSize = Theme.cbFontSizeSM;
-          textPaddingLeft = Theme.cbTitlePaddingLeftSM;
-          break;
         default:
-          textFontSize = Theme.cbFontSizeMD;
-          textPaddingLeft = Theme.cbTitlePaddingLeftMD;
+          textFontSize = Theme.cbFontSizeDefault;
+          textPaddingLeft = Theme.cbTitlePaddingLeftDefault;
       }
 
       let textStyle = [
         {
           color: Theme.cbTitleColor,
-          fontSize: textFontSize,
+          fontSize: Theme.cbFontSize,
           overflow: 'hidden',
-          paddingLeft: textPaddingLeft,
+          paddingLeft: Theme.cbTitlePaddingLeft,
         },
       ].concat(titleStyle);
 
@@ -189,6 +232,7 @@ export default class Checkbox extends Component {
       activeOpacity,
       onChange,
       onPress,
+      checkedDisabled,
       ...others
     } = this.props;
     style = this.buildStyle();
@@ -196,7 +240,7 @@ export default class Checkbox extends Component {
     return (
       <TouchableOpacity
         style={style}
-        disabled={disabled}
+        disabled={disabled || checkedDisabled}
         activeOpacity={activeOpacity}
         onPress={e => {
           this.setState({checked: !checked});

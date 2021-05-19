@@ -18,7 +18,7 @@ const textColor = '#0887ff';
 //default color
 const defaultColor = '#fff';
 //default text color
-const defaultTextColor = '#333';
+const defaultTextColor = '#888';
 //primary lineHeight
 const largeLineHeight = 24;
 const middleLineHeight = 25;
@@ -135,17 +135,23 @@ export default {
   //Checkbox
   cbTitleColor: defaultTextColor,
   cbFontSizeLG: 20,
-  cbFontSizeMD: 14,
-  cbFontSizeSM: 10,
+  cbFontSize: 13,
   cbTitlePaddingLeftLG: 8,
-  cbTitlePaddingLeftMD: 6,
-  cbTitlePaddingLeftSM: 4,
+  cbTitlePaddingLeft: 16,
   cbCheckedTintColor: primaryColor,
-  cbUncheckedTintColor: '#ccc',
+  cbCheckedDisabledTintColor: '#d9d9d9',
+  cbDisabledBorderColor: '#dcdee0',
+  cbDisabledTintColor: '#f7f8fa',
+  cbUncheckedTintColor: '#999',
   cbIconSizeLG: 18,
-  cbIconSizeMD: 13,
+  cbIconSize: 14,
   cbIconSizeSM: 10,
-  cbDisabledOpacity: 0.65,
+  cbDisabledBorderRadious: 3,
+  cbDisabledBorderWidth: 1,
+  cbCapsuleWidth: 104,
+  cbCapsuleHeight: 32,
+
+  // cbDisabledOpacity: 0.65,
 
   //Input
   inputColor: defaultColor,

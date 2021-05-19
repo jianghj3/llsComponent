@@ -6,12 +6,18 @@ import React, {Component} from 'react';
 import {View, ScrollView, Text, Image, StyleSheet} from 'react-native';
 
 // import { NavigationPage, ListRow, Button, Label, Theme } from 'teaset';
-import {NavigationPage, ListRow, Button, Label, Theme} from '../component-path';
+import {
+  NavigationPage,
+  ListRow,
+  LlsRnButton,
+  Label,
+  Theme,
+} from '../component-path';
 
-export default class ButtonExample extends NavigationPage {
+export default class LlsRnButtonExample extends NavigationPage {
   static defaultProps = {
     ...NavigationPage.defaultProps,
-    title: 'Button',
+    title: 'LlsRnButton',
     showBackButton: true,
   };
 
@@ -23,20 +29,25 @@ export default class ButtonExample extends NavigationPage {
         </View>
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button title="主按钮" type="primary" size="large" />}
+          detail={<LlsRnButton title="主按钮" type="primary" size="large" />}
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button title="主按钮" type="primary" size="large" press={true} />
+            <LlsRnButton
+              title="主按钮"
+              type="primary"
+              size="large"
+              press={true}
+            />
           }
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button
+            <LlsRnButton
               title="主按钮"
               type="primary"
               size="large"
@@ -48,14 +59,24 @@ export default class ButtonExample extends NavigationPage {
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button title="主按钮" type="primary" size="large" loading={true} />
+            <LlsRnButton
+              title="主按钮"
+              type="primary"
+              size="large"
+              loading={true}
+            />
           }
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button title="主按钮" type="primary" size="large" done={true} />
+            <LlsRnButton
+              title="主按钮"
+              type="primary"
+              size="large"
+              done={true}
+            />
           }
           bottomSeparator="none"
         />
@@ -65,20 +86,25 @@ export default class ButtonExample extends NavigationPage {
         </View>
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button title="次按钮" type="secondary" size="large" />}
+          detail={<LlsRnButton title="次按钮" type="secondary" size="large" />}
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button title="次按钮" type="secondary" size="large" press={true} />
+            <LlsRnButton
+              title="次按钮"
+              type="secondary"
+              size="large"
+              press={true}
+            />
           }
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button
+            <LlsRnButton
               title="次按钮"
               type="secondary"
               size="large"
@@ -90,7 +116,7 @@ export default class ButtonExample extends NavigationPage {
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button
+            <LlsRnButton
               title="次按钮"
               type="secondary"
               size="large"
@@ -102,7 +128,12 @@ export default class ButtonExample extends NavigationPage {
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button title="次按钮" type="secondary" size="large" done={true} />
+            <LlsRnButton
+              title="次按钮"
+              type="secondary"
+              size="large"
+              done={true}
+            />
           }
           bottomSeparator="none"
         />
@@ -112,22 +143,22 @@ export default class ButtonExample extends NavigationPage {
         </View>
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button title="文字按钮" type="text" />}
+          detail={<LlsRnButton title="文字按钮" type="text" />}
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button title="文字按钮" type="text" press={true} />}
+          detail={<LlsRnButton title="文字按钮" type="text" press={true} />}
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button title="文字按钮" type="text" disabled={true} />}
+          detail={<LlsRnButton title="文字按钮" type="text" disabled={true} />}
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button title="文字按钮" type="text" loading={true} />}
+          detail={<LlsRnButton title="文字按钮" type="text" loading={true} />}
           bottomSeparator="none"
         />
 
@@ -136,22 +167,22 @@ export default class ButtonExample extends NavigationPage {
         </View>
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button type="icon" iconName="upload" />}
+          detail={<LlsRnButton type="icon" iconName="upload" />}
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button type="icon" iconName="upload" press={true} />}
+          detail={<LlsRnButton type="icon" iconName="upload" press={true} />}
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button type="icon" iconName="upload" disabled={true} />}
+          detail={<LlsRnButton type="icon" iconName="upload" disabled={true} />}
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button type="icon" loading={true} />}
+          detail={<LlsRnButton type="icon" loading={true} />}
           bottomSeparator="none"
         />
 
@@ -160,20 +191,25 @@ export default class ButtonExample extends NavigationPage {
         </View>
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button title="Normal" type="primary" size="middle" />}
+          detail={<LlsRnButton title="Normal" type="primary" size="middle" />}
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button title="Press" type="primary" size="middle" press={true} />
+            <LlsRnButton
+              title="Press"
+              type="primary"
+              size="middle"
+              press={true}
+            />
           }
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button
+            <LlsRnButton
               title="Disable"
               type="primary"
               size="middle"
@@ -188,20 +224,25 @@ export default class ButtonExample extends NavigationPage {
         </View>
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button title="Normal" type="secondary" size="middle" />}
+          detail={<LlsRnButton title="Normal" type="secondary" size="middle" />}
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button title="Press" type="secondary" size="middle" press={true} />
+            <LlsRnButton
+              title="Press"
+              type="secondary"
+              size="middle"
+              press={true}
+            />
           }
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button
+            <LlsRnButton
               title="Disable"
               type="secondary"
               size="middle"
@@ -216,7 +257,7 @@ export default class ButtonExample extends NavigationPage {
         </View>
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button title="小按钮" type="primary" size="small" />}
+          detail={<LlsRnButton title="小按钮" type="primary" size="small" />}
           bottomSeparator="none"
         />
 
@@ -226,7 +267,7 @@ export default class ButtonExample extends NavigationPage {
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button
+            <LlsRnButton
               title="图标按钮"
               type="iconPrimaryButton"
               iconName="upload"
@@ -238,7 +279,7 @@ export default class ButtonExample extends NavigationPage {
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button
+            <LlsRnButton
               title="图标按钮"
               iconName="upload"
               type="iconSecondaryButton"
@@ -250,7 +291,11 @@ export default class ButtonExample extends NavigationPage {
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button title="图标按钮" iconName="upload" type="iconTextButton" />
+            <LlsRnButton
+              title="图标按钮"
+              iconName="upload"
+              type="iconTextButton"
+            />
           }
           bottomSeparator="none"
         />
@@ -264,12 +309,12 @@ export default class ButtonExample extends NavigationPage {
         </View>
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button title="释义按钮" type="primary" mark={true} />}
+          detail={<LlsRnButton title="释义按钮" type="primary" mark={true} />}
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
-          detail={<Button title="释义按钮" type="secondary" mark={true} />}
+          detail={<LlsRnButton title="释义按钮" type="secondary" mark={true} />}
           bottomSeparator="none"
         />
 
@@ -279,7 +324,7 @@ export default class ButtonExample extends NavigationPage {
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button
+            <LlsRnButton
               title="释义按钮"
               content="此处为描述性文案此处为描述性文案"
               type="primary"
@@ -290,7 +335,7 @@ export default class ButtonExample extends NavigationPage {
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Button
+            <LlsRnButton
               title="释义按钮"
               content="此处为描述性文案此处为描述性文案"
               type="secondary"
