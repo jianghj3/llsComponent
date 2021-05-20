@@ -3,15 +3,36 @@
 'use strict';
 
 import {PixelRatio} from 'react-native';
-
+//Button
 //primary color
-const primaryColor = '#337ab7';
+const primaryColor = '#0887ff';
+const primaryPressColor = '#0a64eb';
+const primaryDisabledColor = '#d9d9d9';
 //secondary color
-const secondaryColor = '#5bc0de';
+const secondaryColor = '#fff';
+const secondaryTitleColor = '#0887ff';
+const secondaryBorderColor = '#d0e6fc';
+const secondaryPressColor = '#0a64eb';
+//text color
+const textColor = '#0887ff';
 //default color
 const defaultColor = '#fff';
 //default text color
-const defaultTextColor = '#333';
+const defaultTextColor = '#888';
+//primary lineHeight
+const largeLineHeight = 24;
+const middleLineHeight = 25;
+const smallLineHeight = 23;
+//middle and small height
+const heightMiddle = 49;
+const heightSmall = 38;
+//middle and small button border-radius
+const middleRadius = Math.ceil(heightMiddle / 2);
+const smallRadius = Math.ceil(heightSmall / 2);
+
+//checkBox
+const capsuleBorderWidth = 1;
+const capsuleBorderRadius = 5;
 
 //pixel size
 const pixelSize = (function() {
@@ -46,47 +67,69 @@ export default {
   labelDetailScale: 0.9, //23, 18, 13, 9, 7
   labelDangerScale: 1,
 
-  //Button - background color
+  //Button - default color
   btnColor: defaultColor,
+  //Button - primary background color
   btnPrimaryColor: primaryColor,
+  btnPrimaryPressColor: primaryPressColor,
+  btnPrimaryDisabledColor: primaryDisabledColor,
+  //Button - secondary background color
   btnSecondaryColor: secondaryColor,
-  btnDangerColor: '#d9534f',
-  btnLinkColor: 'rgba(0, 0, 0, 0)',
+  //Button - Text background Color
+  btnTextBackgroundColor: '#fff',
   //Button - title color
   btnTitleColor: primaryColor,
+  //Button - primary title color
   btnPrimaryTitleColor: '#fff',
-  btnSecondaryTitleColor: '#fff',
-  btnDangerTitleColor: '#fff',
-  btnLinkTitleColor: primaryColor,
+  //Button - secondary title color
+  btnSecondaryTitleColor: secondaryTitleColor,
+  btnSecondaryPressTitleColor: secondaryPressColor,
+  btnSecondaryDisabledTitleColor: '#999',
+  //Button - text title color
+  btnTextColor: textColor,
+  btnTextPressTitleColor: '#0a64eb',
+  btnTextDisabledTitleColor: '#999',
+  //Button - title linHeight
+  btnLargeLineHeight: largeLineHeight,
+  btnMiddleLineHeight: middleLineHeight,
+  btnSmallLineHeight: smallLineHeight,
   //Button - border color
   btnBorderColor: primaryColor,
-  btnPrimaryBorderColor: primaryColor,
-  btnSecondaryBorderColor: secondaryColor,
-  btnDangerBorderColor: '#d9534f',
-  btnLinkBorderColor: 'rgba(0, 0, 0, 0)',
+  //Button - secondary border color
+  btnSecondaryBorderColor: secondaryBorderColor,
+  btnSecondaryPressBorderColor: secondaryPressColor,
+  btnSecondaryDisabledBorderColor: '#e2e2e2',
   //Button - border width
   btnBorderWidth: 1,
   //Button - border radius
-  btnBorderRadiusXL: 6,
-  btnBorderRadiusLG: 6,
-  btnBorderRadiusMD: 4,
-  btnBorderRadiusSM: 3,
-  btnBorderRadiusXS: 3,
+  btnBorderRadiusLarge: 6,
+  btnBorderRadiusMiddle: middleRadius,
+  btnBorderRadiusSmall: smallRadius,
   //Button - font size
-  btnFontSizeXL: 29,
-  btnFontSizeLG: 22,
-  btnFontSizeMD: 15,
-  btnFontSizeSM: 11,
-  btnFontSizeXS: 9,
+  btnFontSizeLarge: 18,
+  btnFontSizeMiddle: 18,
+  btnFontSizeSmall: 16,
+  //Button - width
+  btnWidthLarge: 310,
+  btnWidthMiddle: 156,
+  btnWidthSmall: 92,
+  //Button - height
+  btnHeightLarge: 49,
+  btnHeightMiddle: heightMiddle,
+  btnHeightSmall: heightSmall,
+  btnMultiLineHeight: 60,
+  //Button - icon
+  btnIconMarginRight: 6,
+  btnIconSize: 20,
   //Button - padding vertical
   btnPaddingVerticalXL: 8,
-  btnPaddingVerticalLG: 8,
+  btnPaddingVerticalLarge: 16,
   btnPaddingVerticalMD: 6,
   btnPaddingVerticalSM: 4,
   btnPaddingVerticalXS: 2,
   //Button - padding horizontal
   btnPaddingHorizontalXL: 20,
-  btnPaddingHorizontalLG: 16,
+  btnPaddingHorizontalLarge: 128,
   btnPaddingHorizontalMD: 12,
   btnPaddingHorizontalSM: 8,
   btnPaddingHorizontalXS: 4,
@@ -95,18 +138,39 @@ export default {
 
   //Checkbox
   cbTitleColor: defaultTextColor,
-  cbFontSizeLG: 20,
-  cbFontSizeMD: 14,
-  cbFontSizeSM: 10,
-  cbTitlePaddingLeftLG: 8,
-  cbTitlePaddingLeftMD: 6,
-  cbTitlePaddingLeftSM: 4,
+  //checkBox - tintColor
+  cbDisabledTintColor: '#f7f8fa',
   cbCheckedTintColor: primaryColor,
-  cbUncheckedTintColor: '#ccc',
-  cbIconSizeLG: 18,
-  cbIconSizeMD: 13,
-  cbIconSizeSM: 10,
-  cbDisabledOpacity: 0.65,
+  cbUncheckedTintColor: '#999',
+  cbCheckedDisabledTintColor: '#d9d9d9',
+  //checkBox - fontSize
+  cbFontSizeCapsule: 12, //胶囊型字体大小
+  cbFontSize: 13,
+  cbIconSize: 14,
+
+  cbTitlePaddingLeft: 16,
+  cbCapsuleLineHeight: 16,
+
+  cbDisabledBorderRadious: 3,
+  cbDisabledBorderWidth: 1,
+  //胶囊按钮大小
+  cbCapsuleWidth: 104,
+  cbCapsuleHeight: 32,
+
+  cbCapsuleBorderWidth: capsuleBorderWidth,
+  cbCapsuleBorderRadius: capsuleBorderRadius,
+  // checkBox - text color
+  cbCapsuleCheckedTextColor: primaryColor,
+  cbCapsuleUncheckedTextColor: '#333',
+  cbCapsuleDisabledTextColor: '#c8ccd5',
+  // checkBox - background color
+  cbCapsuleCheckedBackgroundColor: '#f6faff',
+  cbCapsuleBackgroundColor: defaultColor,
+  // checkBox - border color
+  cbDisabledBorderColor: '#dcdee0',
+  cbCapsuleCheckedBorderColor: '#0887ff',
+  cbCapsuleUncheckedBorderColor: '#c8ccd5',
+  cbCapsuleDisabledBorderColor: '#e2e2e2',
 
   //Input
   inputColor: defaultColor,
@@ -186,7 +250,7 @@ export default {
   stepperFontSize: 13,
   stepperBtnTextColor: defaultTextColor,
   stepperBtnFontSize: 13,
-  stepperValueMinWidth: 40,  
+  stepperValueMinWidth: 40,
   stepperValuePaddingHorizontal: 8,
   stepperButtonWidth: 20,
   stepperButtonHeight: 20,
@@ -364,7 +428,7 @@ export default {
   apItemPaddingVertical: 8,
   apItemPaddingHorizontal: 12,
   apSeparatorColor: '#ccc',
-  apSeparatorWidth: pixelSize,  
+  apSeparatorWidth: pixelSize,
 
   //PullPicker
   pupColor: '#f8f8f8',
@@ -435,4 +499,3 @@ export default {
   //NavigationPage
   backButtonTitle: 'Back',
 };
-
