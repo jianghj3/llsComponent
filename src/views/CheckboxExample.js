@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 import {View, ScrollView, StyleSheet, Text, Image} from 'react-native';
 
 // import {NavigationPage, ListRow, Checkbox, Text} from 'teaset';
-import {NavigationPage, ListRow, Checkbox} from '../component-path';
+import {NavigationPage, ListRow, LlsCheckbox} from '../component-path';
 
 export default class CheckboxExample extends NavigationPage {
   static defaultProps = {
@@ -24,7 +24,8 @@ export default class CheckboxExample extends NavigationPage {
       default: false,
       checkedDisabled: true,
       checkedCustom: false,
-
+      capsuleChecked: true,
+      capsuleUnchecked: false,
       checkedLG: false,
       checkedEmpty: false,
       checkedDisable: true,
@@ -40,7 +41,7 @@ export default class CheckboxExample extends NavigationPage {
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Checkbox
+            <LlsCheckbox
               checked={this.state.checkedStandard}
               onChange={value => this.setState({checkedStandard: value})}
             />
@@ -53,7 +54,7 @@ export default class CheckboxExample extends NavigationPage {
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Checkbox
+            <LlsCheckbox
               title="勾选"
               checked={this.state.checked}
               onChange={value => this.setState({checked: value})}
@@ -64,7 +65,7 @@ export default class CheckboxExample extends NavigationPage {
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Checkbox
+            <LlsCheckbox
               title="默认"
               checked={this.state.default}
               onChange={value => this.setState({default: value})}
@@ -74,12 +75,12 @@ export default class CheckboxExample extends NavigationPage {
         />
         <ListRow
           style={styles.listRowContainer}
-          detail={<Checkbox title="禁用勾选" checkedDisabled={true} />}
+          detail={<LlsCheckbox title="禁用勾选" checkedDisabled={true} />}
           bottomSeparator="none"
         />
         <ListRow
           style={styles.listRowContainer}
-          detail={<Checkbox title="禁用" disabled={true} />}
+          detail={<LlsCheckbox title="禁用" disabled={true} />}
           bottomSeparator="none"
         />
 
@@ -89,12 +90,12 @@ export default class CheckboxExample extends NavigationPage {
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Checkbox
+            <LlsCheckbox
               size="large"
               title="已选"
               checkBoxContent="选项"
-              checked={this.state.checked}
-              onChange={value => this.setState({checked: value})}
+              checked={this.state.capsuleChecked}
+              onChange={value => this.setState({capsuleChecked: value})}
             />
           }
           bottomSeparator="none"
@@ -102,12 +103,12 @@ export default class CheckboxExample extends NavigationPage {
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Checkbox
+            <LlsCheckbox
               size="large"
               title="未选"
               checkBoxContent="选项"
-              checked={this.state.default}
-              onChange={value => this.setState({default: value})}
+              checked={this.state.capsuleUnchecked}
+              onChange={value => this.setState({capsuleUnchecked: value})}
             />
           }
           bottomSeparator="none"
@@ -115,7 +116,7 @@ export default class CheckboxExample extends NavigationPage {
         <ListRow
           style={styles.listRowContainer}
           detail={
-            <Checkbox
+            <LlsCheckbox
               size="large"
               title="禁用"
               checkBoxContent="选项"
@@ -124,95 +125,7 @@ export default class CheckboxExample extends NavigationPage {
           }
           bottomSeparator="none"
         />
-
-        <View style={styles.category}>
-          <Text style={styles.categoryText}>空</Text>
-        </View>
-
-        <ListRow
-          title="Size sm"
-          detail={
-            <Checkbox
-              title="Checkbox"
-              size="sm"
-              checked={this.state.checkedSM}
-              onChange={value => this.setState({checkedSM: value})}
-            />
-          }
-          topSeparator="full"
-        />
-        <ListRow
-          title="Size md"
-          detail={
-            <Checkbox
-              title="Checkbox"
-              size="md"
-              checked={this.state.checkedMD}
-              onChange={value => this.setState({checkedMD: value})}
-            />
-          }
-        />
-        <ListRow
-          title="Size lg"
-          detail={
-            <Checkbox
-              title="Checkbox"
-              size="lg"
-              checked={this.state.checkedLG}
-              onChange={value => this.setState({checkedLG: value})}
-            />
-          }
-          bottomSeparator="full"
-        />
         <View style={{height: 20}} />
-        <ListRow
-          title="Empty title"
-          detail={
-            <Checkbox
-              checked={this.state.checkedEmpty}
-              onChange={value => this.setState({checkedEmpty: value})}
-            />
-          }
-          topSeparator="full"
-        />
-        <ListRow
-          title="Disabled"
-          detail={
-            <Checkbox
-              title="Checkbox"
-              disabled={true}
-              checked={this.state.checkedDisable}
-              onChange={value => this.setState({checkedDisable: value})}
-            />
-          }
-          bottomSeparator="full"
-        />
-        <View style={{height: 20}} />
-        <ListRow
-          title="Custom"
-          detail={
-            <Checkbox
-              title="Custom"
-              titleStyle={{color: '#8a6d3b', paddingLeft: 4}}
-              checkedIcon={
-                <Image
-                  style={{width: 15, height: 15, tintColor: '#8a6d3b'}}
-                  source={require('../icons/checkbox_checked.png')}
-                />
-              }
-              uncheckedIcon={
-                <Image
-                  style={{width: 15, height: 15, tintColor: '#8a6d3b'}}
-                  source={require('../icons/checkbox_unchecked.png')}
-                />
-              }
-              checked={this.state.checkedCustom}
-              onChange={value => this.setState({checkedCustom: value})}
-            />
-          }
-          topSeparator="full"
-          bottomSeparator="full"
-        />
       </ScrollView>
     );
   }

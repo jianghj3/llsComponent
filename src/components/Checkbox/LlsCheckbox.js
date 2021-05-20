@@ -4,7 +4,14 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  Image,
+  TouchableOpacity,
+  View,
+  ViewPropTypes,
+} from 'react-native';
 
 // import Theme from 'teaset/themes/Theme';
 import Theme from '../../component-path';
@@ -13,7 +20,7 @@ export default class Checkbox extends Component {
   static propTypes = {
     checked: PropTypes.bool,
     defaultChecked: PropTypes.bool,
-    size: PropTypes.oneOf(['large', 'lg', 'md', 'sm']),
+    size: PropTypes.oneOf(['large', 'small']),
     title: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.string,
@@ -25,25 +32,24 @@ export default class Checkbox extends Component {
       PropTypes.shape({uri: PropTypes.string}),
       PropTypes.number,
     ]),
-    checkedIconStyle: Image.propTypes.style,
     uncheckedIcon: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.shape({uri: PropTypes.string}),
       PropTypes.number,
     ]),
-    uncheckedIconStyle: Image.propTypes.style,
     onChange: PropTypes.func,
     checkedDisabled: PropTypes.bool, //禁用勾选判断
-    checkedDisabledIconStyle: Image.propTypes.style,
-    disabledIconStyle: Image.propTypes.style,
+    defaultBoxStyle: Image.propTypes.style,
+    capsuleBoxStyle: ViewPropTypes.style,
+    capsuleTextStyle: Text.propTypes.style,
   };
 
   static defaultProps = {
     defaultChecked: false,
-    size: 'md',
+    size: 'small',
     checkedIcon: require('../../icons/checked.png'),
     uncheckedIcon: require('../../icons/unchecked.png'),
-    hitSlop: {top: 8, bottom: 8, left: 8, right: 8},
+    hitSlop: {top: 8, bottom: 8, left: 8, right: 8}, //延伸按钮的作用范围
   };
 
   constructor(props) {
@@ -87,14 +93,12 @@ export default class Checkbox extends Component {
       size,
       checkedIcon,
       uncheckedIcon,
-      checkedIconStyle,
-      uncheckedIconStyle,
       checkedDisabled,
-      checkedDisabledIconStyle,
       disabled,
-      disabledIconStyle,
       checkBoxContent,
       defaultBoxStyle,
+      capsuleBoxStyle,
+      capsuleTextStyle,
     } = this.props;
     let {checked} = this.state;
 
@@ -105,33 +109,62 @@ export default class Checkbox extends Component {
       borderRadius,
       renderCapsule;
     switch (size) {
-      case 'lg':
-        iconSize = Theme.cbIconSizeLG;
-        break;
-      case 'sm':
-        iconSize = Theme.cbIconSizeSM;
-        break;
       case 'large':
+        //渲染胶囊复选框
+        let textColor,
+          borderColor,
+          textFontSize = Theme.cbFontSizeCapsule,
+          textLineHeight = Theme.cbCapsuleLineHeight,
+          backgroundColor = Theme.cbCapsuleBackgroundColor,
+          borderWidth = Theme.cbCapsuleBorderWidth,
+          borderRadius = Theme.cbCapsuleBorderRadius;
+
+        if (checked) {
+          backgroundColor = Theme.cbCapsuleCheckedBackgroundColor;
+          borderColor = Theme.cbCapsuleCheckedBorderColor;
+          textColor = Theme.cbCapsuleCheckedTextColor;
+        } else if (disabled) {
+          borderColor = Theme.cbCapsuleDisabledBorderColor;
+          textColor = Theme.cbCapsuleDisabledTextColor;
+        } else {
+          borderColor = Theme.cbCapsuleUncheckedBorderColor;
+          textColor = Theme.cbCapsuleUncheckedTextColor;
+        }
+
         let capsuleStyle = [
+          //胶囊复选框按钮框样式
           {
             width: Theme.cbCapsuleWidth,
             height: Theme.cbCapsuleHeight,
-            backgroundColor: 'red',
+            backgroundColor,
+            borderColor,
+            borderWidth,
+            borderRadius,
             alignItems: 'center',
             justifyContent: 'center',
-            borderRadius: 5,
           },
-        ];
+        ].concat(capsuleBoxStyle);
+
+        let textStyle = [
+          //胶囊按钮内部文字内容样式
+          {
+            color: textColor,
+            fontSize: textFontSize,
+            lineHeight: textLineHeight,
+          },
+        ].concat(capsuleTextStyle);
+
         renderCapsule = (
-          <TouchableOpacity style={capsuleStyle}>
-            <Text>{checkBoxContent}</Text>
-          </TouchableOpacity>
+          <View style={capsuleStyle}>
+            <Text style={textStyle}>{checkBoxContent}</Text>
+          </View>
         );
         break;
       default:
         iconSize = Theme.cbIconSize;
     }
 
+    //渲染小checkBox
     if (checked) {
       tintColor = Theme.cbCheckedTintColor;
     } else if (checkedDisabled) {
@@ -178,24 +211,14 @@ export default class Checkbox extends Component {
     }
   }
 
+  //统一渲染小checkBox和胶囊型的标题
   renderTitle() {
-    let {size, title, titleStyle} = this.props;
+    let {title, titleStyle} = this.props;
 
     if (
       !React.isValidElement(title) &&
       (title || title === '' || title === 0)
     ) {
-      let textFontSize, textPaddingLeft;
-      switch (size) {
-        case 'lg':
-          textFontSize = Theme.cbFontSizeLG;
-          textPaddingLeft = Theme.cbTitlePaddingLeftLG;
-          break;
-        default:
-          textFontSize = Theme.cbFontSizeDefault;
-          textPaddingLeft = Theme.cbTitlePaddingLeftDefault;
-      }
-
       let textStyle = [
         {
           color: Theme.cbTitleColor,
@@ -225,18 +248,19 @@ export default class Checkbox extends Component {
       title,
       titleStyle,
       checkedIcon,
-      checkedIconStyle,
       uncheckedIcon,
-      uncheckedIconStyle,
       disabled,
       activeOpacity,
       onChange,
       onPress,
       checkedDisabled,
+      defaultBoxStyle,
+      capsuleBoxStyle,
+      capsuleTextStyle,
       ...others
     } = this.props;
     style = this.buildStyle();
-    if (disabled) activeOpacity = style.opacity;
+
     return (
       <TouchableOpacity
         style={style}

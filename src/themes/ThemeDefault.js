@@ -30,6 +30,10 @@ const heightSmall = 38;
 const middleRadius = Math.ceil(heightMiddle / 2);
 const smallRadius = Math.ceil(heightSmall / 2);
 
+//checkBox
+const capsuleBorderWidth = 1;
+const capsuleBorderRadius = 5;
+
 //pixel size
 const pixelSize = (function() {
   let pixelRatio = PixelRatio.get();
@@ -134,24 +138,39 @@ export default {
 
   //Checkbox
   cbTitleColor: defaultTextColor,
-  cbFontSizeLG: 20,
-  cbFontSize: 13,
-  cbTitlePaddingLeftLG: 8,
-  cbTitlePaddingLeft: 16,
-  cbCheckedTintColor: primaryColor,
-  cbCheckedDisabledTintColor: '#d9d9d9',
-  cbDisabledBorderColor: '#dcdee0',
+  //checkBox - tintColor
   cbDisabledTintColor: '#f7f8fa',
+  cbCheckedTintColor: primaryColor,
   cbUncheckedTintColor: '#999',
-  cbIconSizeLG: 18,
+  cbCheckedDisabledTintColor: '#d9d9d9',
+  //checkBox - fontSize
+  cbFontSizeCapsule: 12, //胶囊型字体大小
+  cbFontSize: 13,
   cbIconSize: 14,
-  cbIconSizeSM: 10,
+
+  cbTitlePaddingLeft: 16,
+  cbCapsuleLineHeight: 16,
+
   cbDisabledBorderRadious: 3,
   cbDisabledBorderWidth: 1,
+  //胶囊按钮大小
   cbCapsuleWidth: 104,
   cbCapsuleHeight: 32,
 
-  // cbDisabledOpacity: 0.65,
+  cbCapsuleBorderWidth: capsuleBorderWidth,
+  cbCapsuleBorderRadius: capsuleBorderRadius,
+  // checkBox - text color
+  cbCapsuleCheckedTextColor: primaryColor,
+  cbCapsuleUncheckedTextColor: '#333',
+  cbCapsuleDisabledTextColor: '#c8ccd5',
+  // checkBox - background color
+  cbCapsuleCheckedBackgroundColor: '#f6faff',
+  cbCapsuleBackgroundColor: defaultColor,
+  // checkBox - border color
+  cbDisabledBorderColor: '#dcdee0',
+  cbCapsuleCheckedBorderColor: '#0887ff',
+  cbCapsuleUncheckedBorderColor: '#c8ccd5',
+  cbCapsuleDisabledBorderColor: '#e2e2e2',
 
   //Input
   inputColor: defaultColor,
