@@ -12,6 +12,7 @@ import ThemeExample from './ThemeExample';
 import LabelExample from './LabelExample';
 import ButtonExample from './ButtonExample';
 import CheckboxExample from './CheckboxExample';
+import RadioBtnExample from './RadioBtnExample';
 import InputExample from './InputExample';
 import SelectExample from './SelectExample';
 import StepperExample from './StepperExample';
@@ -65,9 +66,14 @@ export default class Home extends NavigationPage {
           onPress={() => this.navigator.push({view: <ButtonExample />})}
         />
         <ListRow
-          title="Checkbox"
+          title="CheckBox"
           detail="复选框"
           onPress={() => this.navigator.push({view: <CheckboxExample />})}
+        />
+        <ListRow
+          title="RadioBtn"
+          detail="单选框"
+          onPress={() => this.navigator.push({view: <RadioBtnExample />})}
         />
         <ListRow
           title="Input"

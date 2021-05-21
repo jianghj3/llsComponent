@@ -13,8 +13,7 @@ import {
   ViewPropTypes,
 } from 'react-native';
 
-// import Theme from 'teaset/themes/Theme';
-import Theme from '../../component-path';
+import Theme from '../../themes/Theme';
 
 export default class Checkbox extends Component {
   static propTypes = {
@@ -42,6 +41,11 @@ export default class Checkbox extends Component {
     defaultBoxStyle: Image.propTypes.style,
     capsuleBoxStyle: ViewPropTypes.style,
     capsuleTextStyle: Text.propTypes.style,
+    checkBoxContent: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   };
 
   static defaultProps = {
@@ -64,7 +68,7 @@ export default class Checkbox extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    let {checked, disabled} = this.props;
+    let {checked} = this.props;
     if (checked === true || checked === false) {
       if (checked !== this.state.checked) {
         this.setState({checked});
@@ -73,7 +77,7 @@ export default class Checkbox extends Component {
   }
 
   buildStyle() {
-    let {style, disabled} = this.props;
+    let {style} = this.props;
 
     style = [
       {

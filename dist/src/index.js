@@ -5,7 +5,10 @@
 import Theme from './themes/Theme';
 import Label from './components/Label/Label';
 import LlsRnButton from './components/Button/LlsRnButton';
-import LlsCheckbox from './components/Checkbox/LlsCheckbox';
+import LlsRnCheckBox from './components/CheckBox/LlsRnCheckBox';
+import LlsRnRadioGroup from './components/RadioBtn/LlsRnRadioGroup';
+import LlsRnRadioButton from './components/RadioBtn/LlsRnRadioButton';
+
 import Input from './components/Input/Input';
 import Select from './components/Select/Select';
 import Stepper from './components/Stepper/Stepper';
@@ -46,7 +49,11 @@ var Teaset = {
 
   Label,
   LlsRnButton,
-  LlsCheckbox,
+  LlsRnCheckBox,
+
+  LlsRnRadioGroup,
+  LlsRnRadioButton,
+
   Input,
   Select,
   Stepper,

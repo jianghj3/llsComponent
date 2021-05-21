@@ -13,8 +13,7 @@ import {
   View,
 } from 'react-native';
 
-// import Theme from 'teaset/themes/Theme';
-import Theme from '../../component-path';
+import Theme from '../../themes/Theme';
 
 export default class LlsRnButton extends Component {
   static propTypes = {

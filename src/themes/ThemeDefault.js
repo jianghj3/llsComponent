@@ -133,8 +133,6 @@ export default {
   btnPaddingHorizontalMD: 12,
   btnPaddingHorizontalSM: 8,
   btnPaddingHorizontalXS: 4,
-  //Button - disabled opacity
-  btnDisabledOpacity: 0.65,
 
   //Checkbox
   cbTitleColor: defaultTextColor,
@@ -171,6 +169,18 @@ export default {
   cbCapsuleCheckedBorderColor: '#0887ff',
   cbCapsuleUncheckedBorderColor: '#c8ccd5',
   cbCapsuleDisabledBorderColor: '#e2e2e2',
+
+  //RadioBtn
+  RaidoGroupDefaultColor: primaryColor,
+  RadioButtonUnselectedBackgroundColor: defaultColor,
+  RadioButtonDisabledBackgroundColor: '#f7f8fa',
+  RadioButtonCheckedDisabledBackgroundColor: '#d9d9d9',
+  RadioButtonCheckedDisabledBackgroundColor: '#d9d9d9',
+  RadioButtonTitleColor: '#888',
+  RadioButtonTitlePaddingLeft: 16,
+  RadioButtonDisabledBorderColor: '#dcdee0',
+  RadioButtonCheckedDisabledBorderColor: '#d9d9d9',
+  RadioButtonUncheckedBorderColor: '#999',
 
   //Input
   inputColor: defaultColor,

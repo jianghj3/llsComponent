@@ -21,6 +21,10 @@ function copyThemes() {
   return src('src/themes/**/*.*').pipe(dest('dist/src/themes/'));
 }
 
+function copyImages() {
+  return src('src/images/**/*.*').pipe(dest('dist/src/images/'));
+}
+
 function copyIndex() {
   return src('src/index.js').pipe(dest('dist/src/'));
 }
@@ -35,6 +39,7 @@ exports.default = series(
   copyIcons,
   copyDocs,
   copyThemes,
+  copyImages,
   copyIndex,
   copyReadme,
 );
