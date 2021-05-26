@@ -6,10 +6,10 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 
 import Overlay from '../Overlay/Overlay';
-import ToastView from './ToastView';
+import LlsRnIndicatorView from './LlsRnIndicatorView';
 
 export default class Toast extends Overlay {
-  static ToastView = ToastView;
+  static LlsRnIndicatorView = LlsRnIndicatorView;
   static defaultDuration = 'short';
   static defaultPosition = 'center';
   static messageDefaultDuration = 'short';
@@ -29,7 +29,7 @@ export default class Toast extends Overlay {
     let {duration, ...others} =
       options && typeof options === 'object' ? options : {};
 
-    let key = super.show(<this.ToastView {...others} />);
+    let key = super.show(<this.LlsRnIndicatorView {...others} />);
     if (typeof duration !== 'number') {
       switch (duration) {
         case 'long':
@@ -59,45 +59,5 @@ export default class Toast extends Overlay {
     position = this.defaultPosition,
   ) {
     return this.show({text, duration, position, icon: 'success'});
-  }
-
-  static fail(
-    text,
-    duration = this.defaultDuration,
-    position = this.defaultPosition,
-  ) {
-    return this.show({text, duration, position, icon: 'fail'});
-  }
-
-  static smile(
-    text,
-    duration = this.defaultDuration,
-    position = this.defaultPosition,
-  ) {
-    return this.show({text, duration, position, icon: 'smile'});
-  }
-
-  static sad(
-    text,
-    duration = this.defaultDuration,
-    position = this.defaultPosition,
-  ) {
-    return this.show({text, duration, position, icon: 'sad'});
-  }
-
-  static info(
-    text,
-    duration = this.defaultDuration,
-    position = this.defaultPosition,
-  ) {
-    return this.show({text, duration, position, icon: 'info'});
-  }
-
-  static stop(
-    text,
-    duration = this.defaultDuration,
-    position = this.defaultPosition,
-  ) {
-    return this.show({text, duration, position, icon: 'stop'});
   }
 }

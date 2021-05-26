@@ -4,6 +4,7 @@
 
 import React, {Component} from 'react';
 import {View, ScrollView, Text, Image, StyleSheet} from 'react-native';
+import styles from './styles';
 
 // import { NavigationPage, ListRow, Button, Label, Theme } from 'teaset';
 import {
@@ -348,21 +349,3 @@ export default class LlsRnButtonExample extends NavigationPage {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  category: {
-    marginTop: 20,
-    marginLeft: 5,
-    marginBottom: 10,
-    paddingLeft: 5,
-    borderLeftColor: '#0887ff',
-    borderLeftWidth: 5,
-  },
-  categoryText: {
-    fontSize: 18,
-  },
-  listRowContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-});

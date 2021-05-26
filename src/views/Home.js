@@ -11,8 +11,11 @@ import {Theme, NavigationPage, NavigationBar, ListRow} from '../component-path';
 import ThemeExample from './ThemeExample';
 import LabelExample from './LabelExample';
 import ButtonExample from './ButtonExample';
+import MaskExample from './MaskExample';
 import CheckboxExample from './CheckboxExample';
 import RadioBtnExample from './RadioBtnExample';
+import SwitchExample from './SwitchExample';
+import IndicatorExample from './IndicatorExample';
 import InputExample from './InputExample';
 import SelectExample from './SelectExample';
 import StepperExample from './StepperExample';
@@ -66,6 +69,16 @@ export default class Home extends NavigationPage {
           onPress={() => this.navigator.push({view: <ButtonExample />})}
         />
         <ListRow
+          title="Mask"
+          detail="按钮"
+          onPress={() => this.navigator.push({view: <MaskExample />})}
+        />
+        <ListRow
+          title="ActiveityIndicator"
+          detail="指示器"
+          onPress={() => this.navigator.push({view: <IndicatorExample />})}
+        />
+        <ListRow
           title="CheckBox"
           detail="复选框"
           onPress={() => this.navigator.push({view: <CheckboxExample />})}
@@ -74,6 +87,11 @@ export default class Home extends NavigationPage {
           title="RadioBtn"
           detail="单选框"
           onPress={() => this.navigator.push({view: <RadioBtnExample />})}
+        />
+        <ListRow
+          title="Switch"
+          detail="开关"
+          onPress={() => this.navigator.push({view: <SwitchExample />})}
         />
         <ListRow
           title="Input"

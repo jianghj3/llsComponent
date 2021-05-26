@@ -4,6 +4,7 @@
 
 import React, {Component} from 'react';
 import {View, ScrollView, StyleSheet, Text, Image} from 'react-native';
+import styles from './styles';
 
 // import {NavigationPage, ListRow, Checkbox, Text} from 'teaset';
 import {NavigationPage, ListRow, LlsRnCheckBox} from '../component-path';
@@ -126,21 +127,3 @@ export default class CheckboxExample extends NavigationPage {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  category: {
-    marginTop: 20,
-    marginLeft: 5,
-    marginBottom: 10,
-    paddingLeft: 5,
-    borderLeftColor: '#0887ff',
-    borderLeftWidth: 5,
-  },
-  categoryText: {
-    fontSize: 18,
-  },
-  listRowContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-});

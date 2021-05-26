@@ -182,6 +182,25 @@ export default {
   RadioButtonCheckedDisabledBorderColor: '#d9d9d9',
   RadioButtonUncheckedBorderColor: '#999',
 
+  //Mask
+  MaskOpacity: 0.7,
+  MaskBackgrounColor: '#000',
+
+  //Switch
+  switchHeight: 24,
+  switchWidth: 40,
+  switchOpenedBackgroundColor: primaryColor,
+  switchClosedBackgroundColor: '#dddfe4',
+  switchDotHeight: 20,
+  switchDotwidth: 20,
+  switchDotBackgroundColor: 'white',
+  switchTextColor: '#888',
+  switchTextMarginLeft: 16,
+  switchTextFontSize: 13,
+  switchTextLineHeight: 19,
+  switchOpenedDisabledBackgroundColor: '#b5dbff',
+  switchClosedDisabledBackgroundColor: '#eeeff2',
+
   //Input
   inputColor: defaultColor,
   inputTextColor: defaultTextColor,
@@ -281,14 +300,20 @@ export default {
   siDisabledOpacity: 0.65,
 
   //Badge
-  badgeSize: 18,
-  badgeDotSize: 6,
+  badgeSize: 16,
+  badgeMinWidth: 17,
+  badgeDotSize: 8,
   badgePadding: 5,
-  badgeColor: '#f00',
+  badgeColor: '#f82418',
   badgeBorderColor: '#f8f8f8',
   badgeBorderWidth: 0,
   badgeTextColor: '#fff',
   badgeFontSize: 11,
+  badgeNumberFontSize: 12,
+  badgeTextFontSize: 10,
+  badgeBorderBottomLeftRadius: 1,
+
+  badgeShadowColor: 'rgba(255,69,72,0.30)',
 
   //Popover
   popoverColor: defaultColor,

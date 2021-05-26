@@ -2,8 +2,14 @@
 
 'use strict';
 
-import React, {Component, PureComponent} from "react";
-import {StyleSheet, AppRegistry, DeviceEventEmitter, View, Animated} from 'react-native';
+import React, {Component, PureComponent} from 'react';
+import {
+  StyleSheet,
+  AppRegistry,
+  DeviceEventEmitter,
+  View,
+  Animated,
+} from 'react-native';
 import PropTypes from 'prop-types';
 
 import Theme from 'teaset/themes/Theme';
@@ -11,27 +17,30 @@ import Theme from 'teaset/themes/Theme';
 let keyValue = 0;
 
 export default class TopView extends Component {
-
   static add(element) {
     let key = ++keyValue;
-    DeviceEventEmitter.emit("addOverlay", {key, element});
+    DeviceEventEmitter.emit('addOverlay', {key, element});
     return key;
   }
 
   static remove(key) {
-    DeviceEventEmitter.emit("removeOverlay", {key});
+    DeviceEventEmitter.emit('removeOverlay', {key});
   }
 
   static removeAll() {
-    DeviceEventEmitter.emit("removeAllOverlay", {});
+    DeviceEventEmitter.emit('removeAllOverlay', {});
   }
 
   static transform(transform, animated, animatesOnly = null) {
-    DeviceEventEmitter.emit("transformRoot", {transform, animated, animatesOnly});
+    DeviceEventEmitter.emit('transformRoot', {
+      transform,
+      animated,
+      animatesOnly,
+    });
   }
 
   static restore(animated, animatesOnly = null) {
-    DeviceEventEmitter.emit("restoreRoot", {animated, animatesOnly});
+    DeviceEventEmitter.emit('restoreRoot', {animated, animatesOnly});
   }
 
   constructor(props) {
@@ -70,13 +79,15 @@ export default class TopView extends Component {
           }
         }
         return false;
-      }
+      };
     }
     return {registerTopViewHandler, unregisterTopViewHandler};
   }
 
   get handler() {
-    return this.handlers.length > 0 ? this.handlers[this.handlers.length - 1] : this;
+    return this.handlers.length > 0
+      ? this.handlers[this.handlers.length - 1]
+      : this;
   }
 
   componentDidMount() {
@@ -86,11 +97,17 @@ export default class TopView extends Component {
       return;
     }
 
-    DeviceEventEmitter.addListener("addOverlay", e => this.handler.add(e));
-    DeviceEventEmitter.addListener("removeOverlay", e => this.handler.remove(e));
-    DeviceEventEmitter.addListener("removeAllOverlay", e => this.handler.removeAll(e));
-    DeviceEventEmitter.addListener("transformRoot", e => this.handler.transform(e));
-    DeviceEventEmitter.addListener("restoreRoot", e => this.handler.restore(e));
+    DeviceEventEmitter.addListener('addOverlay', e => this.handler.add(e));
+    DeviceEventEmitter.addListener('removeOverlay', e =>
+      this.handler.remove(e),
+    );
+    DeviceEventEmitter.addListener('removeAllOverlay', e =>
+      this.handler.removeAll(e),
+    );
+    DeviceEventEmitter.addListener('transformRoot', e =>
+      this.handler.transform(e),
+    );
+    DeviceEventEmitter.addListener('restoreRoot', e => this.handler.restore(e));
   }
 
   componentWillUnmount() {
@@ -100,11 +117,11 @@ export default class TopView extends Component {
       return;
     }
 
-    DeviceEventEmitter.removeAllListeners("addOverlay");
-    DeviceEventEmitter.removeAllListeners("removeOverlay");
-    DeviceEventEmitter.removeAllListeners("removeAllOverlay");
-    DeviceEventEmitter.removeAllListeners("transformRoot");
-    DeviceEventEmitter.removeAllListeners("restoreRoot");
+    DeviceEventEmitter.removeAllListeners('addOverlay');
+    DeviceEventEmitter.removeAllListeners('removeOverlay');
+    DeviceEventEmitter.removeAllListeners('removeAllOverlay');
+    DeviceEventEmitter.removeAllListeners('transformRoot');
+    DeviceEventEmitter.removeAllListeners('restoreRoot');
   }
 
   add(e) {
@@ -132,35 +149,80 @@ export default class TopView extends Component {
   transform(e) {
     let {translateX, translateY, scaleX, scaleY} = this.state;
     let {transform, animated, animatesOnly} = e;
-    let tx = 0, ty = 0, sx = 1, sy = 1;
+    let tx = 0,
+      ty = 0,
+      sx = 1,
+      sy = 1;
     transform.map(item => {
       if (item && typeof item === 'object') {
         for (let name in item) {
           let value = item[name];
           switch (name) {
-            case 'translateX': tx = value; break;
-            case 'translateY': ty = value; break;
-            case 'scaleX': sx = value; break;
-            case 'scaleY': sy = value; break;
+            case 'translateX':
+              tx = value;
+              break;
+            case 'translateY':
+              ty = value;
+              break;
+            case 'scaleX':
+              sx = value;
+              break;
+            case 'scaleY':
+              sy = value;
+              break;
           }
         }
       }
     });
     if (animated) {
       let animates = [
-        Animated.spring(translateX, {toValue: tx, friction: 9, useNativeDriver: false}),
-        Animated.spring(translateY, {toValue: ty, friction: 9, useNativeDriver: false}),
-        Animated.spring(scaleX, {toValue: sx, friction: 9, useNativeDriver: false}),
-        Animated.spring(scaleY, {toValue: sy, friction: 9, useNativeDriver: false}),
+        Animated.spring(translateX, {
+          toValue: tx,
+          friction: 9,
+          useNativeDriver: false,
+        }),
+        Animated.spring(translateY, {
+          toValue: ty,
+          friction: 9,
+          useNativeDriver: false,
+        }),
+        Animated.spring(scaleX, {
+          toValue: sx,
+          friction: 9,
+          useNativeDriver: false,
+        }),
+        Animated.spring(scaleY, {
+          toValue: sy,
+          friction: 9,
+          useNativeDriver: false,
+        }),
       ];
-      animatesOnly ? animatesOnly(animates) : Animated.parallel(animates).start();
+      animatesOnly
+        ? animatesOnly(animates)
+        : Animated.parallel(animates).start();
     } else {
       if (animatesOnly) {
         let animates = [
-          Animated.timing(translateX, {toValue: tx, duration: 1, useNativeDriver: false}),
-          Animated.timing(translateY, {toValue: ty, duration: 1, useNativeDriver: false}),
-          Animated.timing(scaleX, {toValue: sx, duration: 1, useNativeDriver: false}),
-          Animated.timing(scaleY, {toValue: sy, duration: 1, useNativeDriver: false}),
+          Animated.timing(translateX, {
+            toValue: tx,
+            duration: 1,
+            useNativeDriver: false,
+          }),
+          Animated.timing(translateY, {
+            toValue: ty,
+            duration: 1,
+            useNativeDriver: false,
+          }),
+          Animated.timing(scaleX, {
+            toValue: sx,
+            duration: 1,
+            useNativeDriver: false,
+          }),
+          Animated.timing(scaleY, {
+            toValue: sy,
+            duration: 1,
+            useNativeDriver: false,
+          }),
         ];
         animatesOnly(animates);
       } else {
@@ -170,7 +232,6 @@ export default class TopView extends Component {
         scaleY.setValue(sy);
       }
     }
-
   }
 
   restore(e) {
@@ -178,19 +239,53 @@ export default class TopView extends Component {
     let {animated, animatesOnly} = e;
     if (animated) {
       let animates = [
-        Animated.spring(translateX, {toValue: 0, friction: 9, useNativeDriver: false}),
-        Animated.spring(translateY, {toValue: 0, friction: 9, useNativeDriver: false}),
-        Animated.spring(scaleX, {toValue: 1, friction: 9, useNativeDriver: false}),
-        Animated.spring(scaleY, {toValue: 1, friction: 9, useNativeDriver: false}),
+        Animated.spring(translateX, {
+          toValue: 0,
+          friction: 9,
+          useNativeDriver: false,
+        }),
+        Animated.spring(translateY, {
+          toValue: 0,
+          friction: 9,
+          useNativeDriver: false,
+        }),
+        Animated.spring(scaleX, {
+          toValue: 1,
+          friction: 9,
+          useNativeDriver: false,
+        }),
+        Animated.spring(scaleY, {
+          toValue: 1,
+          friction: 9,
+          useNativeDriver: false,
+        }),
       ];
-      animatesOnly ? animatesOnly(animates) : Animated.parallel(animates).start();
+      animatesOnly
+        ? animatesOnly(animates)
+        : Animated.parallel(animates).start();
     } else {
       if (animatesOnly) {
         let animates = [
-          Animated.timing(translateX, {toValue: 0, duration: 1, useNativeDriver: false}),
-          Animated.timing(translateY, {toValue: 0, duration: 1, useNativeDriver: false}),
-          Animated.timing(scaleX, {toValue: 1, duration: 1, useNativeDriver: false}),
-          Animated.timing(scaleY, {toValue: 1, duration: 1, useNativeDriver: false}),
+          Animated.timing(translateX, {
+            toValue: 0,
+            duration: 1,
+            useNativeDriver: false,
+          }),
+          Animated.timing(translateY, {
+            toValue: 0,
+            duration: 1,
+            useNativeDriver: false,
+          }),
+          Animated.timing(scaleX, {
+            toValue: 1,
+            duration: 1,
+            useNativeDriver: false,
+          }),
+          Animated.timing(scaleY, {
+            toValue: 1,
+            duration: 1,
+            useNativeDriver: false,
+          }),
         ];
         animatesOnly(animates);
       } else {
@@ -208,13 +303,14 @@ export default class TopView extends Component {
     return (
       <View style={{backgroundColor: Theme.screenColor, flex: 1}}>
         <Animated.View style={{flex: 1, transform: transform}}>
-          <PureView>
-            {this.props.children}
-          </PureView>
+          <PureView>{this.props.children}</PureView>
         </Animated.View>
         {elements.map((item, index) => {
           return (
-            <View key={'topView' + item.key} style={styles.overlay} pointerEvents='box-none'>
+            <View
+              key={'topView' + item.key}
+              style={styles.overlay}
+              pointerEvents="box-none">
               {item.element}
             </View>
           );
@@ -222,7 +318,6 @@ export default class TopView extends Component {
       </View>
     );
   }
-
 }
 
 var styles = StyleSheet.create({
@@ -238,11 +333,7 @@ var styles = StyleSheet.create({
 
 class PureView extends PureComponent {
   render() {
-    return (
-      <View style={{flex: 1}}>
-        {this.props.children}
-      </View>
-    );
+    return <View style={{flex: 1}}>{this.props.children}</View>;
   }
 }
 
@@ -251,7 +342,6 @@ if (!AppRegistry.registerComponentOld) {
 }
 
 AppRegistry.registerComponent = function(appKey, componentProvider) {
-
   class RootElement extends Component {
     render() {
       let Component = componentProvider();
@@ -264,4 +354,4 @@ AppRegistry.registerComponent = function(appKey, componentProvider) {
   }
 
   return AppRegistry.registerComponentOld(appKey, () => RootElement);
-}
+};

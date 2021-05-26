@@ -1,4 +1,4 @@
-// ToastView.js
+// LlsRnIndicatorView.js
 
 'use strict';
 
@@ -6,10 +6,10 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {View, Image, Text} from 'react-native';
 
-import Theme from 'teaset/themes/Theme';
+import Theme from '../../themes/Theme';
 import Overlay from '../Overlay/Overlay';
 
-export default class ToastView extends Overlay.View {
+export default class LlsRnIndicatorView extends Overlay.View {
   static propTypes = {
     ...Overlay.View.propTypes,
     text: PropTypes.oneOfType([
@@ -21,15 +21,6 @@ export default class ToastView extends Overlay.View {
       PropTypes.element,
       PropTypes.shape({uri: PropTypes.string}), //{uri: 'http://...'}
       PropTypes.number, //require('path/to/image')
-      PropTypes.oneOf([
-        'none',
-        'success',
-        'fail',
-        'smile',
-        'sad',
-        'info',
-        'stop',
-      ]),
     ]),
     position: PropTypes.oneOf(['top', 'bottom', 'center']),
   };
@@ -37,15 +28,9 @@ export default class ToastView extends Overlay.View {
   static defaultProps = {
     ...Overlay.View.defaultProps,
     overlayOpacity: 0,
-    overlayPointerEvents: 'none',
     closeOnHardwareBackPress: false,
     position: 'center',
   };
-
-  get overlayPointerEvents() {
-    let {overlayPointerEvents, modal} = this.props;
-    return modal ? 'auto' : overlayPointerEvents;
-  }
 
   buildStyle() {
     let {style, position} = this.props;
@@ -78,21 +63,6 @@ export default class ToastView extends Overlay.View {
         switch (icon) {
           case 'success':
             imageSource = require('../../icons/success.png');
-            break;
-          case 'fail':
-            imageSource = require('../../icons/fail.png');
-            break;
-          case 'smile':
-            imageSource = require('../../icons/smile.png');
-            break;
-          case 'sad':
-            imageSource = require('../../icons/sad.png');
-            break;
-          case 'info':
-            imageSource = require('../../icons/info.png');
-            break;
-          case 'stop':
-            imageSource = require('../../icons/stop.png');
             break;
           default:
             imageSource = null;

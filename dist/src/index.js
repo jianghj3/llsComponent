@@ -8,6 +8,9 @@ import LlsRnButton from './components/Button/LlsRnButton';
 import LlsRnCheckBox from './components/CheckBox/LlsRnCheckBox';
 import LlsRnRadioGroup from './components/RadioBtn/LlsRnRadioGroup';
 import LlsRnRadioButton from './components/RadioBtn/LlsRnRadioButton';
+import LlsRnMask from './components/Mask/LlsRnMask';
+import LlsRnSwitch from './components/Switch/LlsRnSwitch';
+import LlsRnIndicator from './components/ActivityIndicator/LlsRnIndicator';
 
 import Input from './components/Input/Input';
 import Select from './components/Select/Select';
@@ -53,6 +56,9 @@ var Teaset = {
 
   LlsRnRadioGroup,
   LlsRnRadioButton,
+  LlsRnMask,
+  LlsRnSwitch,
+  LlsRnIndicator,
 
   Input,
   Select,

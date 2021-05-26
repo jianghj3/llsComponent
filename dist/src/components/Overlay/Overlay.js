@@ -2,7 +2,7 @@
 
 'use strict';
 
-import React, {Component} from "react";
+import React, {Component} from 'react';
 import {View} from 'react-native';
 
 import TopView from './TopView';
@@ -12,7 +12,6 @@ import OverlayPopView from './OverlayPopView';
 import OverlayPopoverView from './OverlayPopoverView';
 
 export default class Overlay {
-
   static View = OverlayView;
   static PullView = OverlayPullView;
   static PopView = OverlayPopView;
@@ -31,7 +30,7 @@ export default class Overlay {
       onDisappearCompleted: () => {
         TopView.remove(key);
         onDisappearCompletedSave && onDisappearCompletedSave();
-      }
+      },
     });
     key = TopView.add(element);
     return key;
@@ -48,5 +47,4 @@ export default class Overlay {
   static restoreRoot(animated, animatesOnly = null) {
     TopView.restore(animated, animatesOnly);
   }
-
 }
